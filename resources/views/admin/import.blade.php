@@ -15,10 +15,23 @@
                             <div class="panel-body">
                                 <div class="col">
                                     <div class="row">
-                                        <input type="file">
-                                        <button type="button" class="btn btn-default"><i class="fa fa-plus-square"></i>
-                                            Default
-                                        </button>
+                                        <form action="/dashboard/import" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="col-md-12">
+                                                <div class="col-md-9">
+                                                    <input class="form-control" type="file" accept=".csv" name="file"
+                                                        class="form-control" required="required">
+                                                </div>
+                                                <div class="col-md-3">
+
+                                                    <button type="submit"
+                                                        class="btn btn-sm d-inline btn-primary">Upload</button>
+                                                    <a href="{{ route('downloadsample') }}"
+                                                        class="btn btn-sm d-inline btn-info">Download
+                                                        Format</a>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +96,7 @@
                                 </table>
                             </div>
                             <caption>
-                                <h4>Acuan : </h4>
+                                <h4>Panduan Mengimport Data : </h4>
                                 <ul>
                                     <li>Data yang sudah ada harus dirubah terlebih dahulu layaknya format di atas</li>
                                     <span>Untuk data yang diberi tanda strip ( - ) silahkan dikosongkan saja</span>
