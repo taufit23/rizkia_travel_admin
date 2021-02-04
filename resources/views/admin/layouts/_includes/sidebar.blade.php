@@ -17,10 +17,29 @@
                                         class="lnr lnr-pencil"></i>Input</a></li>
                             <li><a href="/dashboard/import"
                                     class="{{ Request::is('dashboard/import') ? 'active' : '' }}"><i class="fa fa-upload
-                                "></i>Import</a></li>
+                                "></i>Import</a>
+                            </li>
                     </div>
                 </li>
-                <li><a href="icons.html" class=""><i class="lnr lnr-exit"></i> <span>Export</span></a></li>
+
+
+                <li><a href="#sub_import" data-toggle="collapse" class="collapsed"><i class="lnr lnr-download"></i>
+                        <span>Export Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                    <div id="sub_import" class="collapse ">
+                        <ul class="nav">
+                            <li>
+                                <a href="Input.html" class="{{ Request::is('dashboard/export') ? 'active' : '' }}"><i
+                                        class="lnr lnr-pencil"></i>Single Data
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/dashboard/export"
+                                    class="{{ Request::is('dashboard/export') ? 'active' : '' }}"><i class="fa fa-upload
+                                "></i>Data Per grub
+                                </a>
+                            </li>
+                    </div>
+                </li>
             </ul>
         </nav>
     </div>

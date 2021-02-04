@@ -32,9 +32,12 @@ Route::delete('/dashboard/data_jamaah/{id}', [DashboardController::class, 'delet
 Route::get('/dashboard/{id}/delete', [DashboardController::class, 'delete_data']);
 Route::get('/dashboard/import/download', [DashboardController::class, 'download_data'])->name('downloadsample');
 Route::get('/dashboard/import', [DashboardController::class, 'import_data']);
-Route::post('/dashboard/import', [DashboardController::class, 'import_data_go']);
+Route::post('/dashboard/import/go', [DashboardController::class, 'store'])->name('store.import');
 
 
 // Route::get('/dashboard/import/go', [DashboardController::class, 'import_data_go'])->name=('importdata');
 
 // Route::post('/dashboard/import/go', [DashboardController::class, 'import_data_go']);
+// Export data
+Route::get('/dashboard/export', [DashboardController::class, 'show_export']);
+Route::get('/dashboard/export/go', [DashboardController::class, 'export'])->name('exportgo');

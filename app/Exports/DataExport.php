@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\data_jamaah;
+use App\Models\data_jamaah;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class DataExport implements FromCollection

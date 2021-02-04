@@ -10,9 +10,10 @@ use \App\Models\data_jamaah;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Jobs\ImportJob;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use App\Imports\DataImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Session;
+use App\Exports\DataExport;
+use App\Imports\DataImport;
 // use App\Import\
 
 
@@ -110,33 +111,70 @@ class DashboardController extends Controller
     {
         return view('admin.import');
     }
-    public function import_data_go(Request $request)
+    // public function import_data_go(Request $request)
+    // {
+    //     // $this->validate($request, [
+    //     //     'file' => 'required'
+    //     // ]);
+    //     // if ($request->hasFile('file')) {
+    //     //     //GET FILE NYA
+    //     //     $file = $request->file('file');
+    //     //     //MEMBUAT FILENAME DENGAN MENGAMBIL EKSTENSI DARI FILE YANG DI-UPLOAD
+    //     //     $filename = time() . '.' . $file->getClientOriginalExtension();
+
+    //     //     //FILE TERSEBUT DISIMPAN KEDALAM FOLDER
+    //     //     // STORAGE > APP > PUBLIC > IMPORT
+    //     //     //DENGAN MENGGUNAKAN METHOD storeAs()
+    //     //     $file->storeAs(
+    //     //         'public/import', $filename
+    //     //     );
+
+    //     //     //MEMBUAT INSTRUKSI JOB QUEUE
+    //     //     ImportJob::dispatch($filename);
+    //     //     //REDIRECT DENGAN FLASH MESSAGE BERHASIL
+    //     //     return redirect()->back()->with(['success' => 'Upload success']);
+    //     // }
+    //     // //JIKA TIDAK ADA FILE, REDIRECT ERROR
+    //     //  return redirect()->back()->with(['error' => 'Failed to upload file']);
+
+    //     $this->validate($request, [
+    //         'file' => 'required|mimes:xls,xlsx'
+    //     ]);
+
+    //     if ($request->hasFile('file')) {
+    //         // upload filenya
+    //         $file = $request->file('file');
+    //         $filename = time() . '.' . $file->getClientOriginalExtension();
+    //         $file->storeAs(
+    //             'public', $filename
+    //         );
+    //     }
+
+    //     // membuat jobs queque
+    //     ImportJob::diskpatch($filename);
+    //     return redirect('dashboard/data_jamaah')->with('sucess', 'Data Jamaah Berhasil Diupdate');
+
+    //     // Excel::import(new DataImport, request()->file('file'));
+    //     // return back();
+    // }
+
+    // berdasarkan tutor kawan koding yt
+
+    public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'file' => 'required'
-        // ]);
-        // if ($request->hasFile('file')) {
-        //     //GET FILE NYA
-        //     $file = $request->file('file');
-        //     //MEMBUAT FILENAME DENGAN MENGAMBIL EKSTENSI DARI FILE YANG DI-UPLOAD
-        //     $filename = time() . '.' . $file->getClientOriginalExtension();
+        // dd($request);
+        Excel::import(new DataImport, $request->file('file'));
+        return redirect('dashboard/data_jamaah')->with('sucess', 'Data Jamaah Berhasil Diimport');
+    }
 
-        //     //FILE TERSEBUT DISIMPAN KEDALAM FOLDER
-        //     // STORAGE > APP > PUBLIC > IMPORT
-        //     //DENGAN MENGGUNAKAN METHOD storeAs()
-        //     $file->storeAs(
-        //         'public/import', $filename
-        //     );
 
-        //     //MEMBUAT INSTRUKSI JOB QUEUE
-        //     ImportJob::dispatch($filename);
-        //     //REDIRECT DENGAN FLASH MESSAGE BERHASIL
-        //     return redirect()->back()->with(['success' => 'Upload success']);
-        // }
-        // //JIKA TIDAK ADA FILE, REDIRECT ERROR
-        //  return redirect()->back()->with(['error' => 'Failed to upload file']);
+    public function show_export()
+    {
+        return view('admin/export');
+    }
 
-        Excel::import(new DataImport, request()->file('file'));
-        return back();
+    public function export()
+    {
+        return Excel::download(new DataExport, 'Data_jamaah.xlsx');
     }
 }

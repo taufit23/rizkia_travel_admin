@@ -11,21 +11,33 @@
                         <div class="panel">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Import Data CSV</h3>
+                                @if (session('sucess'))
+                                    <div class="alert alert-warning"
+                                        style="margin-top: 25px; margin-bottom: 0px; margin-left: 5px; margin-right: 5px; "
+                                        role="alert">
+                                        {{ session('sucess') }}
+                                    </div>
+                                @endif
                             </div>
                             <div class="panel-body">
                                 <div class="col">
                                     <div class="row">
-                                        <form action="/dashboard/import" method="POST" enctype="multipart/form-data">
+                                        <form action="/dashboard/import/go" method="POST" enctype="multipart/form-data">
+
                                             @csrf
                                             <div class="col-md-12">
                                                 <div class="col-md-9">
-                                                    <input class="form-control" type="file" accept=".csv" name="file"
+                                                    <input class="form-control" type="file" accept="excel" name="file"
                                                         class="form-control" required="required">
                                                 </div>
                                                 <div class="col-md-3">
 
-                                                    <button type="submit"
-                                                        class="btn btn-sm d-inline btn-primary">Upload</button>
+                                                    <input type="submit" value="Import"
+                                                        class="btn btn-sm d-inline btn-primary">
+
+                                                    {{-- <button type="submit"
+                                                        class="btn btn-sm d-inline btn-primary">Upload</button> --}}
+
                                                     <a href="{{ route('downloadsample') }}"
                                                         class="btn btn-sm d-inline btn-info">Download
                                                         Format</a>
