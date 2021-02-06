@@ -27,7 +27,10 @@ class DashboardController extends Controller
     {
         if ($request->has('cari')) {
             $data_jamaah =  data_jamaah::where('nik', 'LIKE','%'.$request->cari.'%')->paginate(10000000);
-        }else{
+        }elseif ($request->has('cari_nama')){
+            $data_jamaah =  data_jamaah::where('name', 'LIKE','%'.$request->cari_nama.'%')->paginate(10000000);
+        }
+        else{
             $data_jamaah = data_jamaah::orderBy('created_at', 'desc')->paginate(10);
         }
 
@@ -49,54 +52,8 @@ class DashboardController extends Controller
         return redirect('dashboard/data_jamaah')->with('sucess', 'Data Jamaah Berhasil Dihapus');
     }
 
-    public function edit_data($id)
-    {
-
-        $jamaah = data_jamaah::find($id);
-        // dd($jamaah);
-        return view('admin.edit', ['jamaah' => $jamaah]);
-    }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    public function update_data(Request $request, $id)
-    {
-        $data = $request->all();
 
 
-        // dd($request)->all();
-        $item = data_jamaah::find($id);
-        // $data()->validate([
-        //     'grub' => 'required|min:5',
-        //     'nama_ayah' => 'required|min:5',
-        //     'nik' => 'required|min:5',
-        //     'alamat' => 'required|min:10',
-        //     'desa_kelurahan' => 'required|min:3',
-        //     'kecamatan' => 'required|min:3',
-        //     'kabupaten_kota' => 'required|min:3',
-        //     'provinsi' => 'required|min:3',
-        //     'sex' => 'required|min:2|max:3',
-        //     'name' => 'required|min:2',
-        //     'tempat_lahir' => 'required|min:5',
-        //     'tanggal_lahir' => 'required|min:5',
-        //     'passpor_no' => 'required|min:5',
-        //     'place_of_isssued_passpor' => 'required|min:5',
-        //     'issued_passpor' => 'required|min:5',
-        //     'expiried_passpor' => 'required|min:5',
-        //     'tanggal_keberangkatan' => 'required|date|'
-        // ]);
-
-        $item->update($data);
-
-        // $this->data_jamaah->editData($id, $jamaah);
-
-        return redirect('dashboard/data_jamaah')->with('sucess', 'Data Jamaah Berhasil Diupdate');
-    }
     // tombol download sampel data
     public function download_data()
     {
@@ -111,63 +68,13 @@ class DashboardController extends Controller
     {
         return view('admin.import');
     }
-    // public function import_data_go(Request $request)
-    // {
-    //     // $this->validate($request, [
-    //     //     'file' => 'required'
-    //     // ]);
-    //     // if ($request->hasFile('file')) {
-    //     //     //GET FILE NYA
-    //     //     $file = $request->file('file');
-    //     //     //MEMBUAT FILENAME DENGAN MENGAMBIL EKSTENSI DARI FILE YANG DI-UPLOAD
-    //     //     $filename = time() . '.' . $file->getClientOriginalExtension();
 
-    //     //     //FILE TERSEBUT DISIMPAN KEDALAM FOLDER
-    //     //     // STORAGE > APP > PUBLIC > IMPORT
-    //     //     //DENGAN MENGGUNAKAN METHOD storeAs()
-    //     //     $file->storeAs(
-    //     //         'public/import', $filename
-    //     //     );
-
-    //     //     //MEMBUAT INSTRUKSI JOB QUEUE
-    //     //     ImportJob::dispatch($filename);
-    //     //     //REDIRECT DENGAN FLASH MESSAGE BERHASIL
-    //     //     return redirect()->back()->with(['success' => 'Upload success']);
-    //     // }
-    //     // //JIKA TIDAK ADA FILE, REDIRECT ERROR
-    //     //  return redirect()->back()->with(['error' => 'Failed to upload file']);
-
-    //     $this->validate($request, [
-    //         'file' => 'required|mimes:xls,xlsx'
-    //     ]);
-
-    //     if ($request->hasFile('file')) {
-    //         // upload filenya
-    //         $file = $request->file('file');
-    //         $filename = time() . '.' . $file->getClientOriginalExtension();
-    //         $file->storeAs(
-    //             'public', $filename
-    //         );
-    //     }
-
-    //     // membuat jobs queque
-    //     ImportJob::diskpatch($filename);
-    //     return redirect('dashboard/data_jamaah')->with('sucess', 'Data Jamaah Berhasil Diupdate');
-
-    //     // Excel::import(new DataImport, request()->file('file'));
-    //     // return back();
-    // }
-
-    // berdasarkan tutor kawan koding yt
-
+    // untuk exekutor import data
     public function store(Request $request)
     {
-        // dd($request);
         Excel::import(new DataImport, $request->file('file'));
         return redirect('dashboard/data_jamaah')->with('sucess', 'Data Jamaah Berhasil Diimport');
     }
-
-
     public function show_export()
     {
         return view('admin/export');
@@ -177,4 +84,45 @@ class DashboardController extends Controller
     {
         return Excel::download(new DataExport, 'Data_jamaah.xlsx');
     }
+    public function input()
+    {
+        return view('admin.input');
+    }
+
+    public function input_go(Request $request)
+    {
+
+    }
+
+
+    public function edit_data($id)
+    {
+
+        $jamaah = data_jamaah::find($id);
+        // dd($jamaah);
+        return view('admin.edit', ['jamaah' => $jamaah]);
+    }
+    public function update(Request $request, $id)
+    {
+        $jamaah = data_jamaah::find($id);
+
+        if ($request->hasFile('avatar')) {
+            $request->file('avatar')->move('image_jamaah/', $request->file('avatar')->GetClientoriginalName());
+            $jamaah->avatar = $request->file('avatar')->GetClientoriginalName();
+            $jamaah->save();
+        }
+        else if ($request->hasFile('foto_passport')) {
+            $request->file('foto_passport')->move('image_jamaah/', $request->file('foto_passport')->GetClientoriginalName());
+            $jamaah->foto_passport = $request->file('foto_passport')->GetClientoriginalName();
+            $jamaah->save();
+        }
+        else if ($request->hasFile('foto_ktp')) {
+            $request->file('foto_ktp')->move('image_jamaah/', $request->file('foto_ktp')->GetClientoriginalName());
+            $jamaah->foto_ktp = $request->file('foto_ktp')->GetClientoriginalName();
+            $jamaah->save();
+        }
+        $jamaah->update($request->all());
+        return redirect('dashboard/data_jamaah/', $id)->with('sucess', 'Data Jamaah Berhasil Diedit');
+    }
 }
+
