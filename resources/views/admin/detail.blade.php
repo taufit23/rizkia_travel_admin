@@ -22,7 +22,7 @@
                                             style="width: 125px;" alt="Avatar">
                                         <h3 class="name">{{ $jama->name }}</h3>
                                         <span class="online-status
-                                                                                @if ($jama->tanggal_keberangkatan > $mytime) status-available
+                                                                                        @if ($jama->tanggal_keberangkatan > $mytime) status-available
                                         @else
                                             status-not-available @endif
                                             ">
@@ -51,7 +51,7 @@
                                                 <span>{{ $jama->place_of_isssued_passpor }}</span>
                                             </li>
                                             <li>Passport Issued
-                                                <span>{{ $jama->place_of_isssued_passpor }}</span>
+                                                <span>{{ $jama->issued_passpor }}</span>
                                             </li>
                                             <li>Passport expiried <span>{{ $jama->expiried_passpor }}</span></li>
 

@@ -41,3 +41,7 @@ Route::post('/dashboard/import/go', [DashboardController::class, 'store'])->name
 // Export data
 Route::get('/dashboard/export', [DashboardController::class, 'show_export']);
 Route::get('/dashboard/export/go', [DashboardController::class, 'export'])->name('exportgo');
+
+
+Route::get('/dashboard/input', [DashboardController::class, 'input']);
+Route::post('/dashboard/input/go', [DashboardController::class, 'input_go']);

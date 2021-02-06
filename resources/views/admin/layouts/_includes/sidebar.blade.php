@@ -13,7 +13,8 @@
                         <span>Create Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                     <div id="subCreate" class="collapse ">
                         <ul class="nav">
-                            <li><a href="Input.html" class="{{ Request::is('dashboard/input') ? 'active' : '' }}"><i
+                            <li><a href="/dashboard/input"
+                                    class="{{ Request::is('dashboard/input') ? 'active' : '' }}"><i
                                         class="lnr lnr-pencil"></i>Input</a></li>
                             <li><a href="/dashboard/import"
                                     class="{{ Request::is('dashboard/import') ? 'active' : '' }}"><i class="fa fa-upload

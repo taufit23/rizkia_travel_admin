@@ -16,6 +16,16 @@
                                 </div>
                             </form>
                         </div>
+                        <div class="m-3">
+                            <form class="navbar-form navbar-right" method="GET" action="/dashboard/data_jamaah">
+                                <div class="input-group">
+                                    <input type="text" name="cari_nama" id="search" class="form-control"
+                                        placeholder="Cari Berdasarkan Nama">
+                                    <span class="input-group-btn"><button type="submit" class="btn btn-primary"><i
+                                                class="lnr lnr-magnifier"></i></button></span>
+                                </div>
+                            </form>
+                        </div>
                         <!-- CONDENSED TABLE -->
                         <div class="panel">
                             <div class="panel-heading">
@@ -30,9 +40,6 @@
                             </div>
 
                             <div class="panel-body">
-
-
-
                                 <table class="table table-condensed">
                                     <thead>
                                         <tr>

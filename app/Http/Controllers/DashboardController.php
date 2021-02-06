@@ -27,7 +27,10 @@ class DashboardController extends Controller
     {
         if ($request->has('cari')) {
             $data_jamaah =  data_jamaah::where('nik', 'LIKE','%'.$request->cari.'%')->paginate(10000000);
-        }else{
+        }elseif ($request->has('cari_nama')){
+            $data_jamaah =  data_jamaah::where('name', 'LIKE','%'.$request->cari_nama.'%')->paginate(10000000);
+        }
+        else{
             $data_jamaah = data_jamaah::orderBy('created_at', 'desc')->paginate(10);
         }
 
@@ -64,13 +67,76 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function update_data(Request $request, $id)
+    public function update_data($id)
     {
-        $data = $request->all();
-
-
+        // $data = $request->all();
         // dd($request)->all();
-        $item = data_jamaah::find($id);
+        // $item = data_jamaah::find($id);
+
+        Request()->validate([
+            'grub' => 'required|min:5',
+            'nama_ayah' => 'required|min:5',
+            'nik' => 'required|min:5',
+            'alamat' => 'required|min:10',
+            'desa_kelurahan' => 'required|min:3',
+            'kecamatan' => 'required|min:3',
+            'kabupaten_kota' => 'required|min:3',
+            'provinsi' => 'required|min:3',
+            'sex' => 'required|min:2|max:3',
+            'name' => 'required|min:2',
+            'tempat_lahir' => 'required|min:5',
+            'tanggal_lahir' => 'required|min:5',
+            'passpor_no' => 'required|min:5',
+            'place_of_isssued_passpor' => 'required|min:5',
+            'issued_passpor' => 'required|min:5',
+            'expiried_passpor' => 'required|min:5',
+            'tanggal_keberangkatan' => 'required|date|',
+            'status_pembayaran' => 'required',
+            'no_telp' => 'required|int',
+            'email' => 'required',
+            'avatar' => 'required|mimes:jpf,jpeg,bmp,png|max:1024',
+            'foto_passport' => 'required|mimes:jpf,jpeg,bmp,png|max:1024',
+            'foto_ktp' => 'required|mimes:jpf,jpeg,bmp,png|max:1024',
+        ],[
+            'reqired' => 'wajib diisi !!',
+        ]);
+
+        // jika validasi lolos
+        $file = Request()->avatar;
+        $file = Request()->foto_passport;
+        $file = Request()->foto_ktp;
+        $fileName = Request()->nik . Requsest->name() . '.' . $file->extension();
+        $file->move(public_path('image_jamaah'), $fileName);
+
+        $data = [
+            'grub' => Request->grub,
+            'nama_ayah' => Request->nama_ayah,
+            'nik' => Request->nik,
+            'alamat' => Request->alamat,
+            'desa_kelurahan' => Request->desa_kelurahan,
+            'kecamatan' => Request->kecamatan,
+            'kabupaten_kota' => Request->kabupaten,
+            'provinsi' => Request->provinsi,
+            'sex' => Request->sex,
+            'name' => Request->name,
+            'tempat_lahir' => Request->tempat_lahir,
+            'tanggal_lahir' => Request->Tanggal_lahir,
+            'passpor_no' => Request->passpor_no,
+            'place_of_isssued_passpor' => Request->place_of_isssued_passpor,
+            'issued_passpor' => Request->issued_passpor,
+            'expiried_passpor' => Request->expiried_passpor,
+            'tanggal_keberangkatan' => Request->tanggal_keberangkatan,
+            'status_pembayaran' => Request->status_pembayaran,
+            'no_telp' => Request->no_telp,
+            'email' => Request->email,
+            'avatar' => $fileName,
+            'foto_passport' => $fileName,
+            'foto_ktp' => $fileName,
+        ];
+
+        $this->data_jamaah->editData($id, $data);
+        return redirect('dashboard/data_jamaah')->with('sucess', 'Data Jamaah Berhasil Diupdate');
+
         // $data()->validate([
         //     'grub' => 'required|min:5',
         //     'nama_ayah' => 'required|min:5',
@@ -91,11 +157,11 @@ class DashboardController extends Controller
         //     'tanggal_keberangkatan' => 'required|date|'
         // ]);
 
-        $item->update($data);
+        // $item->update($data);
 
         // $this->data_jamaah->editData($id, $jamaah);
 
-        return redirect('dashboard/data_jamaah')->with('sucess', 'Data Jamaah Berhasil Diupdate');
+        // return redirect('dashboard/data_jamaah')->with('sucess', 'Data Jamaah Berhasil Diupdate');
     }
     // tombol download sampel data
     public function download_data()
@@ -176,5 +242,21 @@ class DashboardController extends Controller
     public function export()
     {
         return Excel::download(new DataExport, 'Data_jamaah.xlsx');
+    }
+    public function input()
+    {
+        return view('admin.input');
+    }
+    public function input_go(Request $request)
+    {
+        // dd($request);
+        // $this->validate($request, [
+        //     'nama_depan' => 'required|min:5',
+        //     'email' => 'required|email|unique:users',
+        //     'jenis_kelamin' => 'required',
+        //     'agama' => 'required',
+        //     'avatar' => 'mimes:jpeg,bmp,png'
+        // ]);
+        //
     }
 }
