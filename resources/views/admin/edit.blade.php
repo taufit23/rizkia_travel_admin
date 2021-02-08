@@ -63,14 +63,22 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="email">Email : </label>
                                 <div class="col-sm-10">
+<<<<<<< HEAD
                                     <input name="email" type="email" value="{{ $jamaah->email }}" class="form-control"
+=======
+                                    <input name="email" type="text" value="{{ $jamaah->email }}" class="form-control"
+>>>>>>> e87669f5b627c76d978c025b453c15740084186f
                                         id="email" placeholder="Masukan Email">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="no_telp">No Telp : </label>
                                 <div class="col-sm-10">
+<<<<<<< HEAD
                                     <input name="no_telp" type="tel" value="{{ $jamaah->no_telp }}" class="form-control"
+=======
+                                    <input name="no_telp" type="text" value="{{ $jamaah->no_telp }}" class="form-control"
+>>>>>>> e87669f5b627c76d978c025b453c15740084186f
                                         id="no_telp" placeholder="Masukan No Telp">
                                 </div>
                             </div>

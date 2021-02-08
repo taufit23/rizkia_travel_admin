@@ -54,12 +54,5 @@ class data_jamaah extends Model
             return asset('image/passport_default.jpg');
         }return asset('image/' . $this->foto_passport);
     }
-    // public function editData($id, $jamaah)
-    // {
-    //     DB::table('data_jamaah')->where('id', $id)->update($jamaah);
-    // }
-    public function editData($id, $data)
-    {
-        DB::table('data_jamaah')->where('id', $id)->update($data);
-    }
+
 }
