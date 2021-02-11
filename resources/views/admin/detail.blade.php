@@ -16,17 +16,15 @@
                                 @endphp
                                 <!-- PROFILE HEADER -->
                                 <div class="profile-header">
-                                    <div class="overlay"></div>
                                     <div class="profile-main">
                                         <img src="{{ $jama->getAvatar() }}" class="img-circle img-fluid"
                                             style="width: 125px;" alt="Avatar">
-                                        <h3 class="name">{{ $jama->name }}</h3>
-                                        <span class="online-status
-                                                                                        @if ($jama->tanggal_keberangkatan > $mytime) status-available
+                                        <h3 class="name text-info bing-bg">{{ $jama->name }}</h3>
+                                        <span style="border-radius: 20px;"
+                                            class="online-status text-warning bg-primary @if ($jama->tanggal_keberangkatan > $mytime) status-available
                                         @else
                                             status-not-available @endif
                                             ">
-                                            {{-- {{ dd($mytime) }} --}}
 
                                             @if ($jama->tanggal_keberangkatan > $mytime)
                                                 Belum Berangkat
@@ -46,6 +44,8 @@
                                         @foreach ($jamaah as $jama)
                                             <li>Tanggal Keberangkatan <span>{{ $jama->tanggal_keberangkatan }}</span></li>
                                             <li>Grub <span>{{ $jama->grub }}</span></li>
+                                            <li>Status Pembayaran <span>{{ $jama->status_pembayaran }}</span></li>
+                                            <li>Jenis Paket <span>{{ $jama->jenis_paket }}</span></li>
                                             <li>Passport Number <span>{{ $jama->passpor_no }}</span></li>
                                             <li>place of issue passport
                                                 <span>{{ $jama->place_of_isssued_passpor }}</span>
@@ -54,6 +54,12 @@
                                                 <span>{{ $jama->issued_passpor }}</span>
                                             </li>
                                             <li>Passport expiried <span>{{ $jama->expiried_passpor }}</span></li>
+                                            @if (auth()->user()->role == 'super_admin')
+                                                <li class="text-center">
+                                                    <a href="/dashboard/{{ $jama->id }}/data_jamaah/data_jamaah_edit"
+                                                        class="btn btn-default">Edit Data jamaah</a>
+                                                </li>
+                                            @endif
 
                                         @endforeach
                                     </ul>
@@ -66,20 +72,18 @@
                         <!-- END LEFT COLUMN -->
                         <!-- RIGHT COLUMN -->
                         <div class="profile-right">
+                            @if (session('sucess'))
+                                <div class="alert alert-success" style="margin: 10px 0px;" role="alert">
+                                    {{ session('sucess') }}
+                                </div>
+                            @endif
                             <!-- TABBED CONTENT -->
-                            <div class="custom-tabs-line tabs-line-bottom left-aligned">
-                                <ul class="nav" role="tablist">
-                                    <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">
-                                            Basic Info</a></li>
-                                    {{-- <li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">Projects <span
-                                                class="badge">7</span></a></li> --}}
-                                </ul>
-                            </div>
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="tab-bottom-left1">
                                     <div class="table-responsive">
+                                        <h3 style="margin: 0px; important!">Personal Info</h3>
                                         @foreach ($jamaah as $jama)
-                                            <table class="table project-table">
+                                            <table class="table table-">
                                                 <tbody>
                                                     <tr>
                                                         <td>Nama</td>
@@ -115,7 +119,13 @@
                                                     <tr>
                                                         <td>Alamat Lengkap</td>
                                                         <td>
-                                                            <span>{{ $jama->alamat . ', ' . $jama->desa_kelurahan . ', ' . $jama->kecamatan . ', ' . $jama->kabupaten_kota . ', ' . $jama->provinsi }}</span>
+                                                            <span>{{ $jama->alamat . ', ' . $jama->desa_kelurahan . ', ' . $jama->kecamatan . ', ' . $jama->kabupaten_kota . ', ' . $jama->provinsi }}
+
+                                                                @if (auth()->user()->role == 'super_admin')
+                                                                    <a href="/dashboard/{{ $jama->id }}/data_jamaah/alamat_edit"
+                                                                        class="btn btn-primary btn-sm">Edit alamat</a>
+                                                                @endif
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -124,92 +134,56 @@
                                                             <span>{{ $jama->nama_ayah }}</span>
                                                         </td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Email</td>
+                                                        <td>
+                                                            <span>{{ $jama->email }}</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>No. Telp</td>
+                                                        <td>
+                                                            <span>{{ $jama->no_telp }}</span>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
 
+                                            <div class="text-center">
+                                                <button class="btn btn-outline-info btn-info" type="button"
+                                                    data-toggle="modal" data-target="#modal_avatar">Tampil
+                                                    Avatar
+                                                </button>
+                                                <button class="btn btn-outline-info btn-info" type="button"
+                                                    data-toggle="modal" data-target="#modal_ktp">Tampil
+                                                    KTP
+                                                </button>
+                                                <button class="btn btn-outline-info btn-info" type="button"
+                                                    data-toggle="modal" data-target="#modal_passport">Tampil
+                                                    Passport
+                                                </button>
+
+                                            </div>
                                     </div>
                                 </div>
-                                {{-- <div class="tab-pane fade" id="tab-bottom-left2">
-                                    <div class="table-responsive">
-                                        <table class="table project-table">
-                                            <tbody>
-                                                <tr>
-                                                    <td><a href="#">Spot Media</a></td>
-                                                    <td>
-                                                        <div class="progress">
-                                                            <div> <span>60% Complete</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="#">E-Commerce Site</a></td>
-                                                    <td>
-                                                        <div class="progress">
-                                                            <div> <span>33% Complete</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="#">Project 123GO</a></td>
-                                                    <td>
-                                                        <div class="progress">
-                                                            <div> <span>68% Complete</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="#">Wordpress Theme</a></td>
-                                                    <td>
-                                                        <div class="progress">
-                                                            <div> <span>75%</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="#">Project 123GO</a></td>
-                                                    <td>
-                                                        <div class="progress">
-                                                            <div class="progress-bar progress-bar-success"
-                                                                role="progressbar" aria-valuenow="100" aria-valuemin="0"
-                                                                aria-valuemax="100" style="width: 100%;">
-                                                                <span>100%</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="#">Redesign Landing Page</a></td>
-                                                    <td>
-                                                        <div class="progress">
-                                                            <div class="progress-bar progress-bar-success"
-                                                                role="progressbar" aria-valuenow="100" aria-valuemin="0"
-                                                                aria-valuemax="100" style="width: 100%;">
-                                                                <span>100%</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div> --}}
                             </div>
                             <!-- END TABBED CONTENT -->
                             <div class="text-center">
-                                <a href="/dashboard/data_jamaah" class="btn btn-default">Kembali</a>
-                                <a href="/dashboard/{{ $jama->id }}/edit" class="btn btn-warning">Edit Profile</a>
+                                <a href="{{ url()->previous() }}" class="btn btn-default">Kembali</a>
+                                <a href="/dashboard/{{ $jama->id }}/data_jamaah/personal_edit"
+                                    class="btn btn-warning">Edit Data Personal</a>
+                                <form style="margin: 10px" action="/dashboard/data_jamaah/{{ $jama->id }}"
+                                    method="post"
+                                    onclick="return confirm('yakin ingin Menghapus Data {{ $jama->name }}')">
+                                    @method('delete')
+                                    @csrf
+                                    <button class=" btn btn-danger" type="submit">
+                                        DELETE
+                                    </button>
+                                </form>
                             </div>
                         </div>
-                        @endforeach
+
                         <!-- END RIGHT COLUMN -->
                     </div>
                 </div>
@@ -220,4 +194,62 @@
     <!-- END MAIN -->
 
 
+
+    <!-- Modal Avatar -->
+    <div class="modal fade" id="modal_avatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="{{ $jama->getAvatar() }}" class="img-fluid" style="width: 500px;" alt="Avatar">
+            </div>
+            <div class="modal-footer">
+                <a href="/dashboard/{{ $jama->id }}/data_jamaah/personal_edit" class="btn btn-warning">Edit</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal KTP -->
+    <div class="modal fade" id="modal_ktp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="{{ $jama->getKtp() }}" class="img-fluid" style="width: 500px;" alt="Avatar">
+            </div>
+            <div class="modal-footer">
+                <a href="/dashboard/{{ $jama->id }}/data_jamaah/alamat_edit" class="btn btn-primary btn-sm">Edit</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Passport -->
+    <div class="modal fade" id="modal_passport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="{{ $jama->getPassport() }}" class="img-fluid" style="width: 500px;" alt="Avatar">
+            </div>
+            <div class="modal-footer">
+                <a href="/dashboard/{{ $jama->id }}/data_jamaah/data_jamaah_edit" class="btn btn-default">Edit</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    @endforeach
 @endsection

@@ -11,6 +11,7 @@
 |
 */
 
+
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
@@ -53,7 +54,12 @@ $app->singleton(
 |
 */
 
+$app->register(Laravolt\Indonesia\ServiceProvider::class);
 
 
+// class aliases
+class_alias(Laravolt\Indonesia\Facade::class, 'Indonesia');
+
+$app->configurationIsCached('laravolt');
 
 return $app;

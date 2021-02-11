@@ -32,27 +32,31 @@ class data_jamaah extends Model
         'status_pembayaran',
         'jenis_paket',
         'no_telp',
-        'email'];
+        'email',
+        'avatar',
+        'foto_ktp',
+        'foto_passport',
+    ];
     // get foto avatar
     public function getAvatar()
     {
         if (!$this->avatar) {
             return asset('image/default.png');
-        }return asset('image/' . $this->avatar);
+        }return asset('storage/' . $this->avatar);
     }
     // get foto ktp
     public function getKtp()
     {
         if (!$this->foto_ktp) {
             return asset('image/ktp_default.jpg');
-        }return asset('image/' . $this->foto_ktp);
+        }return asset('storage/' . $this->foto_ktp);
     }
     // get foto passport
     public function getPassport()
     {
         if (!$this->foto_passport) {
             return asset('image/passport_default.jpg');
-        }return asset('image/' . $this->foto_passport);
+        }return asset('storage/' . $this->foto_passport);
     }
 
 }

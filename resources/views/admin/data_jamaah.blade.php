@@ -8,19 +8,10 @@
                     <div class="col-md-12">
                         <div class="m-3">
                             <form class="navbar-form navbar-right" method="GET" action="/dashboard/data_jamaah">
+                                @csrf
                                 <div class="input-group">
                                     <input type="text" name="cari" id="search" class="form-control"
-                                        placeholder="Cari Berdasarkan NIK">
-                                    <span class="input-group-btn"><button type="submit" class="btn btn-primary"><i
-                                                class="lnr lnr-magnifier"></i></button></span>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="m-3">
-                            <form class="navbar-form navbar-right" method="GET" action="/dashboard/data_jamaah">
-                                <div class="input-group">
-                                    <input type="text" name="cari_nama" id="search" class="form-control"
-                                        placeholder="Cari Berdasarkan Nama">
+                                        placeholder="Cari Data Jamaah">
                                     <span class="input-group-btn"><button type="submit" class="btn btn-primary"><i
                                                 class="lnr lnr-magnifier"></i></button></span>
                                 </div>
@@ -66,25 +57,18 @@
                                                     <a href="/dashboard/{{ $jamaah->id }}/detail">
                                                         <button class="badge bg-primary text-dark mx-1 ">Detail</button>
                                                     </a>
-                                                    <a href="/dashboard/{{ $jamaah->id }}/edit">
-                                                        <button
-                                                            class="d-inline badge bg-warning text-dark mx-1 ">Edit</button>
-                                                    </a>
-
-                                                    <form action="/dashboard/data_jamaah/{{ $jamaah->id }}" method="post"
-                                                        onclick="return confirm('yakin ingin Menghapus Data {{ $jamaah->name }}')">
-                                                        @method('delete')
-                                                        @csrf
-                                                        <button class="d-inline badge bg-danger text-dark mx-1 "
-                                                            type="submit">
-
-                                                            DELETE
-                                                        </button>
-                                                    </form>
-                                                    {{-- <a href="/dashboard/{{ $jamaah->id }}/delete"
-                                                        onclick="return confirm('yakin ingin Menghapus Data {{ $jamaah->name }}')">
-                                                        <span class="badge bg-danger text-dark mx-1 ">Delete</span>
-                                                    </a> --}}
+                                                    @if (auth()->user()->role == 'super_admin')
+                                                        <form action="/dashboard/data_jamaah/{{ $jamaah->id }}"
+                                                            method="post"
+                                                            onclick="return confirm('yakin ingin Menghapus Data {{ $jamaah->name }}')">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button class="d-inline badge bg-danger text-dark mx-1 "
+                                                                type="submit">
+                                                                DELETE
+                                                            </button>
+                                                        </form>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

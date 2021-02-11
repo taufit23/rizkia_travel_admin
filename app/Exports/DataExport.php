@@ -4,6 +4,10 @@ namespace App\Exports;
 
 use App\Models\data_jamaah;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithMapping;
+
+
+use Maatwebsite\LaravelNovaExcel\Actions\ExportToExcel;
 
 class DataExport implements FromCollection
 {

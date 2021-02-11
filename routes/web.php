@@ -1,47 +1,88 @@
 <?php
 
+use App\Http\Controllers\{AuthController, DashboardController, EditController, ImportExportController, TampilDataController};
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Auth;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::post('/postlogin', [AuthController::class, 'postlogin']);
+Route::get('/logout', [AuthController::class, 'logout']);
+
+
+Route::group(['middleware' => ['auth', 'checkRole:super_admin']], function () {
+    // profile user
+    Route::get('/{id}/my_profile', [AuthController::class, 'my_profile']);
+    Route::get('/{id}/edit_profile', [AuthController::class, 'edit_profile']);
+
+    // tampil data & detail
+    Route::get('/dashboard/data_jamaah', [TampilDataController::class, 'tampil_data']);
+    Route::get('/dashboard/{id}/detail', [TampilDataController::class, 'detail_data'])->name('detail.jamaah');
+
+
+    // Delete
+    Route::delete('/dashboard/data_jamaah/{id}', [TampilDataController::class, 'delete_data']);
+    Route::get('/dashboard/{id}/delete', [TampilDataController::class, 'delete_data']);
+
+    // EditController
+    // update data pribadi
+    Route::get('/dashboard/{id}/data_jamaah/personal_edit', [EditController::class, 'edit_data_pribadi']);
+    Route::put('/dashboard/{id}/update_personal', [EditController::class, 'edit_data_pribadi_action']);
+
+    // update data jamaah
+    Route::get('/dashboard/{id}/data_jamaah/data_jamaah_edit', [EditController::class, 'edit_data_jamaah']);
+    Route::put('/dashboard/{id}/update_jamaah', [EditController::class, 'edit_data_jamaah_action']);
+
+    // update data jamaah
+    Route::get('/dashboard/{id}/data_jamaah/alamat_edit', [EditController::class, 'edit_alamat']);
+    Route::put('/dashboard/{id}/update_alamat', [EditController::class, 'edit_alamat_action']);
+
+    // input
+    Route::get('/dashboard/input', [DashboardController::class, 'input']);
+    Route::post('/dashboard/input/go', [DashboardController::class, 'input_go']);
+
+    // import Data
+    Route::get('/dashboard/import', [ImportExportController::class, 'import_data']);
+    Route::get('/dashboard/import/download', [ImportExportController::class, 'download_data'])->name('downloadsample');
+    Route::post('/dashboard/import/go', [ImportExportController::class, 'store'])->name('store.import');
+
+
+    // Export data
+    Route::get('/dashboard/export', [ImportExportController::class, 'show_export']);
+    Route::get('/dashboard/export/go', [ImportExportController::class, 'export'])->name('exportgo');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/dashboard/data_jamaah', [DashboardController::class, 'tampil_data']);
-// Route::get('/dashboard/data_jamaah/cari', [DashboardController::class, 'cari_data']);
-Route::get('/dashboard/{id}/detail', [DashboardController::class, 'detail_data']);
+Route::middleware('auth')->group(function(){
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
-// update data
-Route::get('/dashboard/{id}/edit', [DashboardController::class, 'edit_data']);
-Route::post('/dashboard/{id}/update_data', [DashboardController::class, 'update'])->name('dashboard.update');
+        // tampil data & detail
+        Route::get('/dashboard/data_jamaah', [TampilDataController::class, 'tampil_data']);
+        Route::get('/dashboard/{id}/detail', [TampilDataController::class, 'detail_data'])->name('detail.jamaah');
 
-Route::delete('/dashboard/data_jamaah/{id}', [DashboardController::class, 'delete_data']);
+        // EditController
+        // update data pribadi
+        Route::get('/dashboard/{id}/data_jamaah/personal_edit', [EditController::class, 'edit_data_pribadi']);
+        Route::put('/dashboard/{id}/update_personal', [EditController::class, 'edit_data_pribadi_action']);
 
-Route::get('/dashboard/{id}/delete', [DashboardController::class, 'delete_data']);
-Route::get('/dashboard/import/download', [DashboardController::class, 'download_data'])->name('downloadsample');
-Route::get('/dashboard/import', [DashboardController::class, 'import_data']);
-Route::post('/dashboard/import/go', [DashboardController::class, 'store'])->name('store.import');
+        // input
+        Route::get('/dashboard/input', [DashboardController::class, 'input']);
+        Route::post('/dashboard/input/go', [DashboardController::class, 'input_go']);
 
-
-// Route::get('/dashboard/import/go', [DashboardController::class, 'import_data_go'])->name=('importdata');
-
-// Route::post('/dashboard/import/go', [DashboardController::class, 'import_data_go']);
-// Export data
-Route::get('/dashboard/export', [DashboardController::class, 'show_export']);
-Route::get('/dashboard/export/go', [DashboardController::class, 'export'])->name('exportgo');
+        // import Data
+        Route::get('/dashboard/import', [ImportExportController::class, 'import_data']);
+        Route::get('/dashboard/import/download', [ImportExportController::class, 'download_data'])->name('downloadsample');
+        Route::post('/dashboard/import/go', [ImportExportController::class, 'store'])->name('store.import');
+});
 
 
-Route::get('/dashboard/input', [DashboardController::class, 'input']);
-Route::post('/dashboard/input/go', [DashboardController::class, 'input_go']);
+
+
+
+
+
+
+
+
+
+
