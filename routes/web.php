@@ -13,8 +13,9 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::group(['middleware' => ['auth', 'checkRole:super_admin']], function () {
     // profile user
-    Route::get('/{id}/my_profile', [AuthController::class, 'my_profile']);
+    Route::get('/{id}/my_profile', [AuthController::class, 'my_profile'])->name('my_profile');
     Route::get('/{id}/edit_profile', [AuthController::class, 'edit_profile']);
+    Route::put('/{id}/edit_profile/update_profile', [AuthController::class, 'update_profile']);
 
     // tampil data & detail
     Route::get('/dashboard/data_jamaah', [TampilDataController::class, 'tampil_data']);
@@ -54,7 +55,12 @@ Route::group(['middleware' => ['auth', 'checkRole:super_admin']], function () {
 });
 
 Route::middleware('auth')->group(function(){
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+        Route::get('/dashboard', [DashboardController::class, 'index']);
+
+        // profile user
+        Route::get('/{id}/my_profile', [AuthController::class, 'my_profile'])->name('my_profile');
+        Route::get('/{id}/edit_profile', [AuthController::class, 'edit_profile']);
+        Route::put('/{id}/edit_profile/update_profile', [AuthController::class, 'update_profile']);
 
         // tampil data & detail
         Route::get('/dashboard/data_jamaah', [TampilDataController::class, 'tampil_data']);

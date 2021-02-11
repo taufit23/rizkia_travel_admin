@@ -52,6 +52,12 @@
                                 </li>
                         </div>
                     </li>
+                    <li>
+                        <a href="/user/add_user" class="{{ Request::is('user/add_user') ? 'active' : '' }}"><i
+                                class="lnr lnr-users"></i>
+                            <span>Tambah User</span>
+                        </a>
+                    </li>
                 @endif
             </ul>
         </nav>

@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
         'role',
     ];
 
@@ -48,6 +49,6 @@ class User extends Authenticatable
     {
         if (!$this->avatar) {
             return asset('image/default.png');
-        }return asset('storage/' . $this->avatar);
+        }return asset('storage/' . auth()->user()->avatar);
     }
 }

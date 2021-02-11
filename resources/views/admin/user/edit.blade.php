@@ -6,40 +6,73 @@
             <div class="container-fluid">
                 <div class="panel panel-profile">
                     <div class="clearfix">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="text-center m-3">
-                                    <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-                                    <h6>Upload a different photo...</h6>
-                                    <input type="file" class="form-control">
+                        <div class="row" style="margin: 15px">
+                            <form class="form-horizontal" role="form"
+                                action="/{{ auth()->user()->id }}/edit_profile/update_profile" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="col-md-5">
+                                    <div class="text-center">
+                                        <img src="{{ auth()->user()->getAvatar() }}" class="avatar img-circle"
+                                            alt="avatar" style="width: 200px;">
+                                        <h6>Upload a different photo...</h6>
+                                        <input type="file" name="avatar" id="avatar"
+                                            class="form-control @error('avatar') is-invalid @enderror">
+                                    </div>@error('avatar')
+                                        <span class="invalid-feedback">
+                                            <div class="alert alert-danger">
+                                                {{ $message }}
+                                            </div>
+                                        </span>
+                                    @enderror
                                 </div>
-                            </div>
 
-                            <!-- edit form column -->
-                            <div class="col-md-7 personal-info">
-                                <div class="alert alert-info alert-dismissable">
-                                    <a class="panel-close close" data-dismiss="alert">×</a>
-                                    <i class="fa fa-coffee"></i>
-                                    This is an <strong>.alert</strong>. Use this to show important messages to the user.
-                                </div>
-                                <h3>Personal info</h3>
 
-                                <form class="form-horizontal" role="form">
+                                <!-- edit form column -->
+                                <div class="col-md-7 personal-info">
+                                    <h3>Personal info</h3>
+
                                     <div class="form-group">
-                                        <label class="col-lg-3 control-label">First name:</label>
-                                        <div class="col-lg-8">
-                                            <input class="form-control" type="text" value="Jane">
+                                        <label class="control-label col-sm-2" for="name">Nama : </label>
+                                        <div class="col-lg-10">
+                                            <input type="text"
+                                                value="{{ old('name') ? old('name') : auth()->user()->name }}" name="name"
+                                                id="name" class="form-control @error('name') is-invalid @enderror"
+                                                placeholder="Masukan Nama">
+                                            @error('name')
+                                                <span class="invalid-feedback">
+                                                    <div class="alert alert-danger">
+                                                        {{ $message }}
+                                                    </div>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label class="col-lg-3 control-label">Last name:</label>
-                                        <div class="col-lg-8">
-                                            <input class="form-control" type="text" value="Bishop">
+                                        <label class="control-label col-sm-2" for="email">Email : </label>
+                                        <div class="col-lg-10">
+                                            <input type="text"
+                                                value="{{ old('email') ? old('email') : auth()->user()->email }}"
+                                                name="email" id="email"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                placeholder="Masukan Email">
+                                            @error('email')
+                                                <span class="invalid-feedback">
+                                                    <div class="alert alert-danger">
+                                                        {{ $message }}
+                                                    </div>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
-
-                                </form>
-                            </div>
+                                    <button type="submit"
+                                        class="btn btn-sm btn-warning btn-outline-light btn-rounded mx-auto">
+                                        Update
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

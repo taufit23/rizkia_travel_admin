@@ -9,6 +9,11 @@
                     <div class="clearfix">
                         <!-- LEFT COLUMN -->
                         <div class="profile-center">
+                            @if (session('sucess'))
+                                <div class="alert alert-success" style="margin-bottom: 10px; " role="alert">
+                                    {{ session('sucess') }}
+                                </div>
+                            @endif
                             <!-- PROFILE HEADER -->
                             <div class="profile-header">
                                 <div class="overlay"></div>
