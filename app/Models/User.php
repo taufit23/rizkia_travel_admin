@@ -48,7 +48,7 @@ class User extends Authenticatable
     public function getAvatar()
     {
         if (!$this->avatar) {
-            return asset('image/default.png');
+            return asset('image/logo_saja.png');
         }return asset('storage/' . auth()->user()->avatar);
     }
 }

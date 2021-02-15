@@ -172,15 +172,17 @@
                                 <a href="{{ url()->previous() }}" class="btn btn-default">Kembali</a>
                                 <a href="/dashboard/{{ $jama->id }}/data_jamaah/personal_edit"
                                     class="btn btn-warning">Edit Data Personal</a>
-                                <form style="margin: 10px" action="/dashboard/data_jamaah/{{ $jama->id }}"
-                                    method="post"
-                                    onclick="return confirm('yakin ingin Menghapus Data {{ $jama->name }}')">
-                                    @method('delete')
-                                    @csrf
-                                    <button class=" btn btn-danger" type="submit">
-                                        DELETE
-                                    </button>
-                                </form>
+                                @if (auth()->user()->role == 'super_admin')
+                                    <form style="margin: 10px" action="/dashboard/data_jamaah/{{ $jama->id }}"
+                                        method="post"
+                                        onclick="return confirm('yakin ingin Menghapus Data {{ $jama->name }}')">
+                                        @method('delete')
+                                        @csrf
+                                        <button class=" btn btn-danger" type="submit">
+                                            DELETE
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
 
@@ -208,7 +210,7 @@
                 <img src="{{ $jama->getAvatar() }}" class="img-fluid" style="width: 500px;" alt="Avatar">
             </div>
             <div class="modal-footer">
-                <a href="/dashboard/{{ $jama->id }}/data_jamaah/personal_edit" class="btn btn-warning">Edit</a>
+                <a href="/dashboard/{{ $jama->id }}/data_jamaah/upload_avatar" class="btn btn-warning">Edit</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -227,7 +229,8 @@
                 <img src="{{ $jama->getKtp() }}" class="img-fluid" style="width: 500px;" alt="Avatar">
             </div>
             <div class="modal-footer">
-                <a href="/dashboard/{{ $jama->id }}/data_jamaah/alamat_edit" class="btn btn-primary btn-sm">Edit</a>
+                <a href="/dashboard/{{ $jama->id }}/data_jamaah/upload_foto_ktp"
+                    class="btn btn-primary btn-sm">Edit</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -246,7 +249,7 @@
                 <img src="{{ $jama->getPassport() }}" class="img-fluid" style="width: 500px;" alt="Avatar">
             </div>
             <div class="modal-footer">
-                <a href="/dashboard/{{ $jama->id }}/data_jamaah/data_jamaah_edit" class="btn btn-default">Edit</a>
+                <a href="/dashboard/{{ $jama->id }}/data_jamaah/upload_foto_passport" class="btn btn-default">Edit</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

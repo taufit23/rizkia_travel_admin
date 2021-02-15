@@ -13,7 +13,11 @@
                         <span>Tampil data</span>
                     </a>
                 </li>
-                <li><a href="#subCreate" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-add"></i>
+                <li><a href="#subCreate" data-toggle="collapse" class="collapsed 
+                    @if (Request::is('dashboard/input')) active @endif
+                        @if (Request::is('dashboard/import'))
+                        active
+                        @endif"><i class="lnr lnr-file-add"></i>
                         <span>Create Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                     <div id="subCreate" class="collapse ">
                         <ul class="nav">
@@ -34,7 +38,10 @@
 
                 @if (auth()->user()->role == 'super_admin')
                     <li>
-                        <a href="#sub_import" data-toggle="collapse" class="collapsed"><i class="lnr lnr-download"></i>
+                        <a href="#sub_import" data-toggle="collapse" class="collapsed
+                        @if (Request::is('dashboard/export')) active @endif @if (Request::is('dashboard/export'))
+                            active
+                            @endif"><i class="lnr lnr-download"></i>
                             <span>Export Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="sub_import" class="collapse ">
                             <ul class="nav">
@@ -53,9 +60,10 @@
                         </div>
                     </li>
                     <li>
-                        <a href="/user/add_user" class="{{ Request::is('user/add_user') ? 'active' : '' }}"><i
+                        <a href="/user/user_management"
+                            class="{{ Request::is('user/user_management') ? 'active' : '' }}"><i
                                 class="lnr lnr-users"></i>
-                            <span>Tambah User</span>
+                            <span>User Management</span>
                         </a>
                     </li>
                 @endif

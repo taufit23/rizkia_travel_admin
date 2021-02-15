@@ -169,7 +169,8 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="sex">Jenis Kelamin : </label>
                                 <div class="col-sm-10">
-                                    <select name="sex" class="form-control  @error('sex') is-invalid @enderror">
+                                    <select name="sex" class="form-control @error('sex') is-invalid @enderror"
+                                        required="required">
                                         <option>Select</option>
                                         <option value="MR" {{ old('sex') == 'MR' ? 'selected' : '' }}>Laki-Laki
                                         </option>
@@ -223,79 +224,6 @@
                                         class="form-control  @error('no_telp') is-invalid @enderror" id="no_telp"
                                         placeholder="Masukan No Telp">
                                     @error('no_telp')
-                                        <span class="invalid-feedback">
-                                            <div class="alert alert-danger">
-                                                {{ $message }}
-                                            </div>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <hr size="20px">
-                            <div class="form-group">
-                                <div class="text-primary">
-                                    <label class="control-label col-sm-2">Passport Detail : </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-sm-2 " for="passpor_no">Nomor Passport : </label>
-                                <div class="col-sm-10">
-                                    <input name="passpor_no" type="text" value="{{ old('passport_no') }}"
-                                        class="form-control  @error('passport_no') is-invalid @enderror" id="passpor_no"
-                                        placeholder="Masukan Nomor Passport">
-                                    @error('passpor_no')
-                                        <span class="invalid-feedback">
-                                            <div class="alert alert-danger">
-                                                {{ $message }}
-                                            </div>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="place_of_isssued_passpor">Tempat Keluar Passport
-                                    : </label>
-                                <div class="col-sm-10">
-                                    <input name="place_of_isssued_passpor" type="text"
-                                        value="{{ old('place_of_isssued_passpor') }}"
-                                        class="form-control  @error('place_of_issued_pasppor') is-invalid @enderror"
-                                        id="place_of_isssued_passpor" placeholder="Masukan Tempat Keluar Passport">
-                                    @error('place_of_issued_pasppor')
-                                        <span class="invalid-feedback">
-                                            <div class="alert alert-danger">
-                                                {{ $message }}
-                                            </div>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="issued_passpor">Tanggal Keluar Passport
-                                    : </label>
-                                <div class="col-sm-10">
-                                    <input name="issued_passpor" type="date" data-date-format="YYYY MMMM DD"
-                                        value="{{ old('issued_passpor') }}"
-                                        class="form-control  @error('issued_passpor') is-invalid @enderror"
-                                        id="issued_passpor" placeholder="Masukan Tanggal Keluar Passport">
-                                    @error('issued_passpor')
-                                        <span class="invalid-feedback">
-                                            <div class="alert alert-danger">
-                                                {{ $message }}
-                                            </div>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="expiried_passpor">Tanggal Berlaku Passport
-                                    : </label>
-                                <div class="col-sm-10">
-                                    <input name="expiried_passpor" type="date" data-date-format="YYYY MMMM DD"
-                                        value="{{ old('expiried_passpor') }}"
-                                        class="form-control  @error('expiried_passpor') is-invalid @enderror"
-                                        id="expiried_passpor" placeholder="Masukan Tanggal Berlaku Passport">
-                                    @error('expiried_passpor')
                                         <span class="invalid-feedback">
                                             <div class="alert alert-danger">
                                                 {{ $message }}
@@ -387,6 +315,83 @@
                                     @enderror
                                 </div>
                             </div>
+
+
+                            <hr size="20px">
+                            <div class="form-group">
+                                <div class="text-primary">
+                                    <label class="control-label col-sm-2">Passport Detail : </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 " for="passpor_no">Nomor Passport : </label>
+                                <div class="col-sm-10">
+                                    <input name="passpor_no" type="text" value="{{ old('passport_no') }}"
+                                        class="form-control  @error('passport_no') is-invalid @enderror" id="passpor_no"
+                                        placeholder="Masukan Nomor Passport">
+                                    @error('passpor_no')
+                                        <span class="invalid-feedback">
+                                            <div class="alert alert-danger">
+                                                {{ $message }}
+                                            </div>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="place_of_isssued_passpor">Tempat Keluar Passport
+                                    : </label>
+                                <div class="col-sm-10">
+                                    <input name="place_of_isssued_passpor" type="text"
+                                        value="{{ old('place_of_isssued_passpor') }}"
+                                        class="form-control  @error('place_of_issued_pasppor') is-invalid @enderror"
+                                        id="place_of_isssued_passpor" placeholder="Masukan Tempat Keluar Passport">
+                                    @error('place_of_issued_pasppor')
+                                        <span class="invalid-feedback">
+                                            <div class="alert alert-danger">
+                                                {{ $message }}
+                                            </div>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="issued_passpor">Tanggal Keluar Passport
+                                    : </label>
+                                <div class="col-sm-10">
+                                    <input name="issued_passpor" type="date" data-date-format="YYYY MMMM DD"
+                                        value="{{ old('issued_passpor') }}"
+                                        class="form-control  @error('issued_passpor') is-invalid @enderror"
+                                        id="issued_passpor" placeholder="Masukan Tanggal Keluar Passport">
+                                    @error('issued_passpor')
+                                        <span class="invalid-feedback">
+                                            <div class="alert alert-danger">
+                                                {{ $message }}
+                                            </div>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="expiried_passpor">Tanggal Berlaku Passport
+                                    : </label>
+                                <div class="col-sm-10">
+                                    <input name="expiried_passpor" type="date" data-date-format="YYYY MMMM DD"
+                                        value="{{ old('expiried_passpor') }}"
+                                        class="form-control  @error('expiried_passpor') is-invalid @enderror"
+                                        id="expiried_passpor" placeholder="Masukan Tanggal Berlaku Passport">
+                                    @error('expiried_passpor')
+                                        <span class="invalid-feedback">
+                                            <div class="alert alert-danger">
+                                                {{ $message }}
+                                            </div>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
 
                             <button type="submit" class="btn btn-outline-info btn-primary btn-block">Submit</button>
                         </form>

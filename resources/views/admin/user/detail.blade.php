@@ -38,7 +38,7 @@
                                     <ul class="list-unstyled list-justify">
                                         <li>Name <span>{{ auth()->user()->name }}</span></li>
                                         <li>Email <span>{{ auth()->user()->email }}</span></li>
-                                        <li>Email
+                                        <li>Role
                                             <span>
                                                 @if (auth()->user()->role == 'super_admin')
                                                     Best

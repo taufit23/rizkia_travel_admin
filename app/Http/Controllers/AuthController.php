@@ -55,6 +55,7 @@ class AuthController extends Controller
         // update avatar
         if ($request->hasFile('avatar')) {
             Storage::delete('public/storage/' . $user->avatar);
+            // dd($user);
             $request->file('avatar')->storeAs('public', $request->id . 'user_avatar_' . $request->file('avatar')->getClientOriginalName());
             $user->avatar = $request->id . 'user_avatar_' . $request->file('avatar')->getClientOriginalName();
             $user->save();

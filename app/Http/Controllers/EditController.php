@@ -19,7 +19,7 @@ class EditController extends Controller
         // dd($request->all());
         $jamaah = data_jamaah::find($id);
         $request->validate([
-            'avatar' => 'image|mimes:png,jpg,jpeg,gif,svg|max:2048',
+            'avatar' => 'image|mimes:png,jpg,jpeg,gif,svg|max:9048',
             'name' => 'min:2|max:192|string|',
             'nik' => 'min:2|max:192',
         ]);
@@ -55,7 +55,7 @@ class EditController extends Controller
         // dd($request->all());
         $jamaah = data_jamaah::find($id);
         $request->validate([
-            'foto_passport' => 'image|mimes:png,jpg,jpeg,gif,svg|max:2048'
+            'foto_passport' => 'image|mimes:png,jpg,jpeg,gif,svg|max:9048'
         ]);
 
 
@@ -97,7 +97,7 @@ class EditController extends Controller
         // dd($request->all());
         $jamaah = data_jamaah::find($id);
         $request->validate([
-            'foto_ktp' => 'image|mimes:png,jpg,jpeg,gif,svg|max:2048',
+            'foto_ktp' => 'image|mimes:png,jpg,jpeg,gif,svg|max:9048',
         ]);
         // update foto_ktp
         if ($request->hasFile('foto_ktp')) {
@@ -114,5 +114,79 @@ class EditController extends Controller
             'alamat' => $request->alamat
         ]);
         return redirect()->route('detail.jamaah', $id)->with('sucess', 'Data berhasil diUpdate');
+    }
+
+
+    // edit gambar only
+    // avatar
+    public function avatar($id)
+    {
+        $jamaah = data_jamaah::find($id);
+        return view('admin.edit_avatar', ['jamaah' => $jamaah]);   
+    }
+    public function upload_avatar(Request $request, $id)
+    {
+        // dd($request->all());
+        $jamaah = data_jamaah::find($id);
+        $request->validate([
+            'avatar' => 'image|mimes:png,jpg,jpeg,gif,svg|max:9048'
+        ]);
+        // update avatar
+        if ($request->hasFile('avatar')) {
+            Storage::delete('public/storage/' . $jamaah->avatar);
+            $request->file('avatar')->storeAs('public', $request->id . 'avatar_' . $request->file('avatar')->getClientOriginalName());
+            $jamaah->avatar = $request->id . 'avatar_' . $request->file('avatar')->getClientOriginalName();
+            $jamaah->save();
+            return redirect()->route('detail.jamaah', $id)->with('sucess', 'Data berhasil diUpdate');
+        }
+        return redirect()->back()->with('error', 'Foto Gagal Di Upload');   
+    }
+    
+    // Foto Ktp
+    public function foto_ktp($id)
+    {
+        $jamaah = data_jamaah::find($id);
+        return view('admin.edit_foto_ktp', ['jamaah' => $jamaah]);   
+    }
+    public function upload_foto_ktp(Request $request, $id)
+    {
+        // dd($request->all());
+        $jamaah = data_jamaah::find($id);
+        $request->validate([
+            'foto_ktp' => 'image|mimes:png,jpg,jpeg,gif,svg|max:9048'
+        ]);
+        // update foto_ktp
+        if ($request->hasFile('foto_ktp')) {
+            Storage::delete('public/storage/' . $jamaah->foto_ktp);
+            $request->file('foto_ktp')->storeAs('public', $request->id . 'foto_ktp_' . $request->file('foto_ktp')->getClientOriginalName());
+            $jamaah->foto_ktp = $request->id . 'foto_ktp_' . $request->file('foto_ktp')->getClientOriginalName();
+            $jamaah->save();
+            return redirect()->route('detail.jamaah', $id)->with('sucess', 'Data berhasil diUpdate');
+        }
+        return redirect()->back()->with('error', 'Foto Gagal Di Upload');   
+    }
+
+    // Foto Passport
+    public function foto_passport($id)
+    {
+        $jamaah = data_jamaah::find($id);
+        return view('admin.edit_foto_passport', ['jamaah' => $jamaah]);   
+    }
+    public function upload_foto_passport(Request $request, $id)
+    {
+        // dd($request->all());
+        $jamaah = data_jamaah::find($id);
+        $request->validate([
+            'foto_passport' => 'image|mimes:png,jpg,jpeg,gif,svg|max:9048'
+        ]);
+        // update foto_passport
+        if ($request->hasFile('foto_passport')) {
+            Storage::delete('public/storage/' . $jamaah->foto_passport);
+            $request->file('foto_passport')->storeAs('public', $request->id . 'foto_passport_' . $request->file('foto_passport')->getClientOriginalName());
+            $jamaah->foto_passport = $request->id . 'foto_passport_' . $request->file('foto_passport')->getClientOriginalName();
+            $jamaah->save();
+            return redirect()->route('detail.jamaah', $id)->with('sucess', 'Data berhasil diUpdate');
+        }
+        return redirect()->back()->with('error', 'Foto Gagal Di Upload');   
     }
 }

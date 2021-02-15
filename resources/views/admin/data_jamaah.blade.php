@@ -30,6 +30,8 @@
                                 @endif
                             </div>
 
+                            {{-- filter --}}
+
                             <div class="panel-body">
                                 <table class="table table-condensed">
                                     <thead>
@@ -74,15 +76,15 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-
-                                {{-- <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-center">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination" style="align-content: space-around">
                                         <li class="page-item">
                                             {{ $data_jamaah->links('vendor.pagination.custom') }}
                                         </li>
                                     </ul>
-                                </nav> --}}
-                                {{ $data_jamaah->onEachSide(5)->links() }}
+                                </nav>
+
+                                {{-- {{ $data_jamaah->onEachSide(5)->links() }} --}}
                             </div>
 
                         </div>

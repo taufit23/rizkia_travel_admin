@@ -27,7 +27,7 @@
                                             @csrf
                                             <div class="col-md-12">
                                                 <div class="col-md-9">
-                                                    <input class="form-control" type="file" accept="excel" name="file"
+                                                    <input class="form-control" type="file" accept="csv" name="file"
                                                         class="form-control" required="required">
                                                 </div>
                                                 <div class="col-md-3">

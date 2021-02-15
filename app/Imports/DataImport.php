@@ -34,6 +34,10 @@ class DataImport implements ToModel,WithHeadingRow
             'issued_passpor'            => $row['issued_passpor'],
             'expiried_passpor'          => $row['expiried_passpor'],
             'tanggal_keberangkatan'     => $row['tanggal_keberangkatan'],
+            'status_pembayaran'     => $row['status_pembayaran'],
+            'jenis_paket'     => $row['jenis_paket'],
+            'no_telp'     => $row['no_telp'],
+            'email'     => $row['email'],
         ]);
     }
 }

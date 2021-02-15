@@ -13,7 +13,8 @@ class TampilDataController extends Controller
             $data_jamaah =  data_jamaah::select("*")
             ->where('nik', 'LIKE','%'.$request->cari.'%')
             ->orWhere('name', 'LIKE','%'.$request->cari.'%')
-            ->orWhere('passpor_no', 'LIKE','%'.$request->cari.'%')->paginate(10000000);
+            ->orWhere('passpor_no', 'LIKE','%'.$request->cari.'%')
+            ->orWhere('grub', 'LIKE','%'.$request->cari.'%')->paginate(10000000);
         }
         else{
             $data_jamaah = data_jamaah::orderBy('created_at', 'desc')->paginate(10);
