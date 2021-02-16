@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use phpDocumentor\Reflection\Types\This;
 use Illuminate\Support\Facedes\DB;
 
@@ -58,5 +59,13 @@ class data_jamaah extends Model
             return asset('image/passport_default.jpg');
         }return asset('storage/' . $this->foto_passport);
     }
+
+    public function getData_byDate($request)
+    {
+        $record = FacadesDB::table('data_jamaah')->select('*')->where('tanggal_keberangkatan' == $request->tanggal_keberangkatan)->get()->toArray();
+
+        return $record;
+    }
+    
 
 }

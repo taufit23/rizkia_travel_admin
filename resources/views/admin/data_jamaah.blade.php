@@ -30,7 +30,7 @@
                                 @endif
                             </div>
 
-                            {{-- filter --}}
+
 
                             <div class="panel-body">
                                 <table class="table table-condensed">

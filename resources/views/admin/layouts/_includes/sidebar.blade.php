@@ -45,16 +45,20 @@
                             <span>Export Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="sub_import" class="collapse ">
                             <ul class="nav">
-                                <li>
-                                    <a href="Input.html"
-                                        class="{{ Request::is('dashboard/export') ? 'active' : '' }}"><i
-                                            class="lnr lnr-pencil"></i>Single Data
-                                    </a>
-                                </li>
+
+
                                 <li>
                                     <a href="/dashboard/export"
                                         class="{{ Request::is('dashboard/export') ? 'active' : '' }}"><i class="fa fa-upload
-                                "></i>Data Per grub
+                                "></i>By Filter
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/dashboard/export_backup"
+                                        class="{{ Request::is('/dashboard/export_backup') ? 'active' : '' }}"><i
+                                            class="fa fa-upload
+                                "></i>Create Backup Data
                                     </a>
                                 </li>
                         </div>

@@ -58,20 +58,25 @@ Route::group(['middleware' => ['auth', 'checkRole:super_admin']], function () {
 
     // import Data
     Route::get('/dashboard/import', [ImportExportController::class, 'import_data']);
-    Route::get('/dashboard/import/download', [ImportExportController::class, 'download_data'])->name('downloadsample');
     Route::post('/dashboard/import/go', [ImportExportController::class, 'store'])->name('store.import');
+    Route::get('/dashboard/import/download', [ImportExportController::class, 'download_data'])->name('downloadsample');
 
 
-    // Export data
-    Route::get('/dashboard/export', [ImportExportController::class, 'show_export']);
-    Route::get('/dashboard/export/go', [ImportExportController::class, 'export'])->name('exportgo');
-
+    
     // User Management
     // tampil user
     Route::get('/user/user_management', [UserManagementController::class, 'tampil_data']);
     // tambah user
     Route::get('/user/user_management/tambah', [UserManagementController::class, 'tambah']);
     Route::post('/user/user_management/tambah/go', [UserManagementController::class, 'tambah_go']);
+    
+    // Export data
+    // controller ImportExportController
+    Route::get('/dashboard/export', [ImportExportController::class, 'show_export'])->name('show_export');
+    Route::get('/dashboard/export_backup', [ImportExportController::class, 'show_export_backup'])->name('show_export_backup');
+    
+    Route::get('/dashboard/export/go', [ImportExportController::class, 'exportall'])->name('exportgo');
+    Route::post('/dashboard/export_filter/go', [ImportExportController::class, 'export_filterdate_of_departure'])->name('export_filterdate_of_departurego');
 });
 
 Route::middleware('auth')->group(function(){
@@ -114,15 +119,3 @@ Route::middleware('auth')->group(function(){
         Route::get('/dashboard/import/download', [ImportExportController::class, 'download_data'])->name('downloadsample');
         Route::post('/dashboard/import/go', [ImportExportController::class, 'store'])->name('store.import');
 });
-
-
-
-
-
-
-
-
-
-
-
-
