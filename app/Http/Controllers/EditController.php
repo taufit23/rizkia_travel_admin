@@ -25,7 +25,8 @@ class EditController extends Controller
         ]);
         // update avatar
         if ($request->hasFile('avatar')) {
-            Storage::delete('public/storage/' . $jamaah->avatar);
+            Storage::delete('public/storage/',$jamaah->avatar);
+            
             $request->file('avatar')->storeAs('public', $request->id . 'avatar_' . $request->file('avatar')->getClientOriginalName());
             $jamaah->avatar = $request->id . 'avatar_' . $request->file('avatar')->getClientOriginalName();
             $jamaah->save();
@@ -63,7 +64,6 @@ class EditController extends Controller
 
         // update foto_passport
         if ($request->hasFile('foto_passport')) {
-            Storage::delete('public/storage/' . $jamaah->foto_passport);
             $request->file('foto_passport')->storeAs('public', $request->id . 'foto_passport_' . $request->file('foto_passport')->getClientOriginalName());
             $jamaah->foto_passport = $request->id . 'foto_passport_' . $request->file('foto_passport')->getClientOriginalName();
             $jamaah->save();
@@ -101,7 +101,6 @@ class EditController extends Controller
         ]);
         // update foto_ktp
         if ($request->hasFile('foto_ktp')) {
-            Storage::delete('public/storage/' . $jamaah->foto_ktp);
             $request->file('foto_ktp')->storeAs('public', $request->id . 'foto_ktp_' . $request->file('foto_ktp')->getClientOriginalName());
             $jamaah->foto_ktp = $request->id . 'foto_ktp_' . $request->file('foto_ktp')->getClientOriginalName();
             $jamaah->save();
@@ -133,7 +132,6 @@ class EditController extends Controller
         ]);
         // update avatar
         if ($request->hasFile('avatar')) {
-            Storage::delete('public/storage/' . $jamaah->avatar);
             $request->file('avatar')->storeAs('public', $request->id . 'avatar_' . $request->file('avatar')->getClientOriginalName());
             $jamaah->avatar = $request->id . 'avatar_' . $request->file('avatar')->getClientOriginalName();
             $jamaah->save();
@@ -157,7 +155,6 @@ class EditController extends Controller
         ]);
         // update foto_ktp
         if ($request->hasFile('foto_ktp')) {
-            Storage::delete('public/storage/' . $jamaah->foto_ktp);
             $request->file('foto_ktp')->storeAs('public', $request->id . 'foto_ktp_' . $request->file('foto_ktp')->getClientOriginalName());
             $jamaah->foto_ktp = $request->id . 'foto_ktp_' . $request->file('foto_ktp')->getClientOriginalName();
             $jamaah->save();
@@ -181,7 +178,6 @@ class EditController extends Controller
         ]);
         // update foto_passport
         if ($request->hasFile('foto_passport')) {
-            Storage::delete('public/storage/' . $jamaah->foto_passport);
             $request->file('foto_passport')->storeAs('public', $request->id . 'foto_passport_' . $request->file('foto_passport')->getClientOriginalName());
             $jamaah->foto_passport = $request->id . 'foto_passport_' . $request->file('foto_passport')->getClientOriginalName();
             $jamaah->save();

@@ -12,19 +12,26 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
 
 Route::group(['middleware' => ['auth', 'checkRole:super_admin']], function () {
+    // tampil data & detail
+    Route::get('/dashboard/data_jamaah', [TampilDataController::class, 'tampil_data']);
+    Route::get('/dashboard/{id}/detail', [TampilDataController::class, 'detail_data'])->name('detail.jamaah');
+    
     // profile user
     Route::get('/{id}/my_profile', [AuthController::class, 'my_profile'])->name('my_profile');
     Route::get('/{id}/edit_profile', [AuthController::class, 'edit_profile']);
     Route::put('/{id}/edit_profile/update_profile', [AuthController::class, 'update_profile']);
 
-    // tampil data & detail
-    Route::get('/dashboard/data_jamaah', [TampilDataController::class, 'tampil_data']);
-    Route::get('/dashboard/{id}/detail', [TampilDataController::class, 'detail_data'])->name('detail.jamaah');
+    // edit & update Pasword
+    Route::get('/{id}/edit_password_user', [AuthController::class, 'edit_password_user']);
+    Route::post('/{id}/edit_password_user/update', [AuthController::class, 'update_password_user'])->name('update_password.user');
 
 
     // Delete
     Route::delete('/dashboard/data_jamaah/{id}', [TampilDataController::class, 'delete_data']);
-    Route::get('/dashboard/{id}/delete', [TampilDataController::class, 'delete_data']);
+    // Route::get('/dashboard/{id}/delete', [TampilDataController::class, 'delete_data']);
+    
+    // Delete User
+    Route::delete('/dashboard/delete_user/{id}', [AuthController::class, 'delete_user']);
 
     // EditController
     // update data pribadi
@@ -65,7 +72,7 @@ Route::group(['middleware' => ['auth', 'checkRole:super_admin']], function () {
     
     // User Management
     // tampil user
-    Route::get('/user/user_management', [UserManagementController::class, 'tampil_data']);
+    Route::get('/user/user_management', [UserManagementController::class, 'tampil_data'])->name('tampil_user');
     // tambah user
     Route::get('/user/user_management/tambah', [UserManagementController::class, 'tambah']);
     Route::post('/user/user_management/tambah/go', [UserManagementController::class, 'tambah_go']);
@@ -86,6 +93,10 @@ Route::middleware('auth')->group(function(){
         Route::get('/{id}/my_profile', [AuthController::class, 'my_profile'])->name('my_profile');
         Route::get('/{id}/edit_profile', [AuthController::class, 'edit_profile']);
         Route::put('/{id}/edit_profile/update_profile', [AuthController::class, 'update_profile']);
+
+        // edit & update Pasword
+        Route::get('/{id}/edit_password_user', [AuthController::class, 'edit_password_user']);
+        Route::post('/{id}/edit_password_user/update', [AuthController::class, 'update_password_user'])->name('update_password.user');
 
         // tampil data & detail
         Route::get('/dashboard/data_jamaah', [TampilDataController::class, 'tampil_data']);

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestMail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UserManagementController extends Controller
 {
@@ -35,12 +37,23 @@ class UserManagementController extends Controller
             'email' => 'required|email|',
             'role' => 'required'
         ]);
-            User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => $request->role,
-            'password' => bcrypt('Rizkia'),
-            ]);
+        User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'role' => $request->role,
+        'password' => bcrypt('Rizkia'),
+        ]);
+
+        $details = [
+            'title' => 'Standard password accepted',
+            'body' => '',
+            'data' => 'Password Standart Anda Adalah',
+            'password' => 'Rizkia',
+        ];
+
+
+
+        Mail::to("$request->email")->send(new TestMail($details));
 
          return redirect('/user/user_management')->with('sucess', 'User Baru Ditambahkan!!!, Silahkan Ingatkan Untuk Melihat Emailnya');
     }

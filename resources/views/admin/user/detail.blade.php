@@ -14,6 +14,7 @@
                                     {{ session('sucess') }}
                                 </div>
                             @endif
+
                             <!-- PROFILE HEADER -->
                             <div class="profile-header">
                                 <div class="overlay"></div>

@@ -28,7 +28,7 @@
                             @if (auth()->user()->role == 'super_admin')
                                 <li>
                                     <a href="/dashboard/import"
-                                        class="{{ Request::is('dashboard/import') ? 'active' : '' }}"><i class="fa fa-upload
+                                        class="{{ Request::is('dashboard/import') ? 'active' : '' }}"><i class="lnr lnr-cloud-upload
                                 "></i>Import
                                     </a>
                                 </li>
@@ -56,9 +56,8 @@
 
                                 <li>
                                     <a href="/dashboard/export_backup"
-                                        class="{{ Request::is('/dashboard/export_backup') ? 'active' : '' }}"><i
-                                            class="fa fa-upload
-                                "></i>Create Backup Data
+                                        class="{{ Request::is('/dashboard/export_backup') ? 'active' : '' }}">
+                                        <i class=" lnr lnr-cloud-download"></i>Create Backup Data
                                     </a>
                                 </li>
                         </div>

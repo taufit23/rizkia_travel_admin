@@ -43,6 +43,7 @@
                                             <th>Nama</th>
                                             <th>Email</th>
                                             <th>Avatar</th>
+                                            <th>Role</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -57,10 +58,12 @@
                                                     <img class="img-thumbnail" src="{{ $personal_user->getAvatar() }}"
                                                         alt="{{ $personal_user->name }}" style="width: 70px">
                                                 </td>
+                                                <td>{{ $personal_user->role }}</td>
                                                 <td>
-                                                    <form action="/dashboard/{{ $personal_user->id }}/delete"
+
+                                                    <form action="/dashboard/delete_user/{{ $personal_user->id }}"
                                                         method="post"
-                                                        onclick="return confirm('yakin ingin Menghapus Akun :  {{ $personal_user->name }}')">
+                                                        onclick="return confirm('yakin ingin Menghapus Data {{ $personal_user->name }}')">
                                                         @method('delete')
                                                         @csrf
                                                         <button class="d-inline badge bg-danger text-dark mx-1 "
@@ -68,6 +71,7 @@
                                                             DELETE
                                                         </button>
                                                     </form>
+
                                                 </td>
                                             </tr>
                                         @endforeach
