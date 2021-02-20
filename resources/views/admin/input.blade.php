@@ -27,7 +27,7 @@
                                 <label class="control-label col-sm-2 requiredstar" for="grub">Grub Keberangkatan:</label>
                                 <div class="col-sm-10">
                                     <input name="grub" type="text" value="{{ old('grub') }}"
-                                        class="form-control  @error('grub') is-invalid @enderror" grub="grub" id="grub"
+                                        class="form-control  @error('grub') is-invalid @enderror" id="grub"
                                         placeholder="Masukan Nama grub">
                                     @error('grub')
                                         <span class="invalid-feedback">

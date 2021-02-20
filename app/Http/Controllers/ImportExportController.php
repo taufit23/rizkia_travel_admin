@@ -40,10 +40,10 @@ class ImportExportController extends Controller
             $data_jamaah =  data_jamaah::select("*")
             ->where('grub', 'LIKE','%'.$request->filter.'%')
             ->orWhere('tanggal_keberangkatan', 'LIKE','%'.$request->filter.'%')
-            ->paginate(10000000);
+            ->paginate(500);
         }
         else{
-            $data_jamaah = data_jamaah::orderBy('created_at', 'desc')->paginate(10000000);
+            $data_jamaah = data_jamaah::orderBy('created_at', 'desc')->paginate(500);
         }
 
         // $data_jamaah = \App\Models\data_jamaah::paginate(10);

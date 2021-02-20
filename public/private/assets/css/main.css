@@ -885,14 +885,14 @@ fieldset[disabled] .btn {
 }
 
 .panel .panel-heading {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     position: relative;
 }
 
 .panel .panel-heading .panel-title {
     margin: 0;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 300;
 }
 
@@ -909,8 +909,8 @@ fieldset[disabled] .btn {
 }
 
 .panel .panel-body {
-    padding-top: 10px;
-    padding-bottom: 15px;
+    padding-top: 5px;
+    padding-bottom: 10px;
 }
 
 .panel .panel-note {
@@ -935,8 +935,8 @@ fieldset[disabled] .btn {
 }
 
 .panel.panel-headline .panel-heading .panel-title {
-    margin-bottom: 8px;
-    font-size: 22px;
+    margin-bottom: 1px;
+    font-size: 18px;
     font-weight: normal;
 }
 

@@ -84,6 +84,10 @@ Route::group(['middleware' => ['auth', 'checkRole:super_admin']], function () {
     
     Route::get('/dashboard/export/go', [ImportExportController::class, 'exportall'])->name('exportgo');
     Route::post('/dashboard/export_filter/go', [ImportExportController::class, 'export_filterdate_of_departure'])->name('export_filterdate_of_departurego');
+
+    // image Slide Show
+    Route::get('/slide_show/slide_show_management', [DashboardController::class, 'slide_show'])->name('slide_show');
+    Route::post('/slide_show/slide_show_management/tambah', [DashboardController::class, 'slide_show_tambah'])->name('slide_show_tambah');
 });
 
 Route::middleware('auth')->group(function(){
@@ -129,4 +133,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/dashboard/import', [ImportExportController::class, 'import_data']);
         Route::get('/dashboard/import/download', [ImportExportController::class, 'download_data'])->name('downloadsample');
         Route::post('/dashboard/import/go', [ImportExportController::class, 'store'])->name('store.import');
+
+        // image Slide Show
+        Route::get('/slide_show/slide_show_management', [DashboardController::class, 'slide_show'])->name('slide_show');
+        Route::post('/slide_show/slide_show_management/tambah', [DashboardController::class, 'slide_show_tambah'])->name('slide_show_tambah');
 });

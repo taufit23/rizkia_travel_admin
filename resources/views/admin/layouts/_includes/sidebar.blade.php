@@ -70,6 +70,13 @@
                         </a>
                     </li>
                 @endif
+                <li>
+                    <a href="/slide_show/slide_show_management"
+                        class="{{ Request::is('slide_show/slide_show_management') ? 'active' : '' }}"><i
+                            class="lnr lnr-picture"></i>
+                        <span>Image Slide Show Management</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

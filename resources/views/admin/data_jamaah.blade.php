@@ -6,19 +6,19 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="m-3">
-                            <form class="navbar-form navbar-right" method="GET" action="/dashboard/data_jamaah">
-                                @csrf
-                                <div class="input-group">
-                                    <input type="text" name="cari" id="search" class="form-control"
-                                        placeholder="Cari Data Jamaah">
-                                    <span class="input-group-btn"><button type="submit" class="btn btn-primary"><i
-                                                class="lnr lnr-magnifier"></i></button></span>
-                                </div>
-                            </form>
-                        </div>
                         <!-- CONDENSED TABLE -->
                         <div class="panel">
+                            <div class="m-3" style="margin: auto 20px">
+                                <form class="navbar-form navbar-right" method="GET" action="/dashboard/data_jamaah">
+                                    @csrf
+                                    <div class="input-group">
+                                        <input type="text" name="cari" id="search" class="form-control"
+                                            placeholder="Cari Data Jamaah">
+                                        <span class="input-group-btn"><button type="submit" class="btn btn-primary"><i
+                                                    class="lnr lnr-magnifier"></i></button></span>
+                                    </div>
+                                </form>
+                            </div>
                             <div class="panel-heading">
                                 <h3 class="panel-title">Data Jamaah</h3>
                                 @if (session('sucess'))
