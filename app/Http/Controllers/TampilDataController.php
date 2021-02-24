@@ -19,7 +19,7 @@ class TampilDataController extends Controller
             ->paginate(10000000);
         }
         else{
-            $data_jamaah = data_jamaah::orderBy('created_at', 'desc')->paginate(5);
+            $data_jamaah = data_jamaah::orderBy('created_at', 'desc')->paginate(25);
         }
 
         // $data_jamaah = \App\Models\data_jamaah::paginate(10);

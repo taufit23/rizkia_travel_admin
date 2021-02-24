@@ -13,6 +13,48 @@
                         <span>Tampil data</span>
                     </a>
                 </li>
+
+                {{-- <li><a href="#subTampilData" data-toggle="collapse" class="collapsed 
+                    @if (Request::is('dashboard/input')) active @endif
+                        @if (Request::is('dashboard/import'))
+                        active
+                        @endif"><i class="lnr lnr-database"></i>
+                        <span>Tampil Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+
+
+
+                    <div id="subTampilData" class="collapse ">
+                        <ul class="nav">
+                            <li><a href="/dashboard/data_jamaah"
+                                    class="{{ Request::is('dashboard/data_jamaah') ? 'active' : '' }}">
+                                    <i class="lnr lnr-license"></i>Umroh
+                                </a>
+                            </li>
+                            <li><a href="/dashboard/wisata_domestik"
+                                    class="{{ Request::is('dashboard/wisata_domestik') ? 'active' : '' }}">
+                                    <i class="lnr lnr-bus"></i>Wisata Domestik
+                                </a>
+                            </li>
+                            <li><a href="/dashboard/wisata_internasional"
+                                    class="{{ Request::is('dashboard/wisata_internasional') ? 'active' : '' }}">
+                                    <i class="lnr lnr-earth"></i>Wisata Internasional
+                                </a>
+                            </li>
+                            <li><a href="/dashboard/penyewaan_mobil"
+                                    class="{{ Request::is('dashboard/penyewaan_mobil') ? 'active' : '' }}">
+                                    <i class="lnr lnr-car"></i>Penyewaan Mobil
+                                </a>
+                            </li>
+
+                            <li><a href="/dashboard/outbount"
+                                    class="{{ Request::is('dashboard/outbount') ? 'active' : '' }}">
+                                    <i class="lnr lnr-map"></i>Outbount
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li> --}}
+
                 <li><a href="#subCreate" data-toggle="collapse" class="collapsed 
                     @if (Request::is('dashboard/input')) active @endif
                         @if (Request::is('dashboard/import'))

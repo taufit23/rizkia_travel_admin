@@ -88,6 +88,12 @@ Route::group(['middleware' => ['auth', 'checkRole:super_admin']], function () {
     // image Slide Show
     Route::get('/slide_show/slide_show_management', [DashboardController::class, 'slide_show'])->name('slide_show');
     Route::post('/slide_show/slide_show_management/tambah', [DashboardController::class, 'slide_show_tambah'])->name('slide_show_tambah');
+
+    // wisata domestik
+    // tampil data & detail
+    Route::get('dashboard/wisata_domestik', [TampilDataController::class, 'tampil_data_wisata_domestik']);
+    Route::get('/dashboard/wisata_domestik/{id}/detail', [TampilDataController::class, 'detail_data_wisata_domestik']);
+
 });
 
 Route::middleware('auth')->group(function(){
