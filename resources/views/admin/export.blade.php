@@ -68,6 +68,8 @@
                                     <td class="text-center">Passport Place Of Issued</td>
                                     <td class="text-center">Passport Issued</td>
                                     <td class="text-center">Passport Expiried</td>
+                                    {{-- <td class="text-center">Created By & Created At</td> --}}
+
                                     {{-- <td class="text-center">Foto Passport</td> --}}
                                 </tr>
                                 @php $no = 1; @endphp
@@ -103,6 +105,7 @@
                                         <td>{{ $jamaah->place_of_isssued_passpor }}</td>
                                         <td>{{ $jamaah->issued_passpor }}</td>
                                         <td>{{ $jamaah->expiried_passpor }}</td>
+                                        {{-- <td>{{ auth()->user()->name }}</td> --}}
                                         {{-- <td>
                                             <img src="{{ asset('/storage/' . $jamaah->foto_passport) }}"
                                                 alt="{{ $jamaah->foto_passport }}" style="width: 80px">
