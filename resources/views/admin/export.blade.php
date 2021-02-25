@@ -18,7 +18,7 @@
 
                         <div class="com-md-2">
                             <button class="btn-sm btn-primary btn" style="margin-bottom: 20px"
-                                onclick="tablesToExcel(['tbl1'], ['#No','Nama', 'Grub', 'Tanggal Keberangkatan'], 'Data Filtered', 'Excel')">Export
+                                onclick="tablesToExcel(['tbl1'], ['#No','Nama Grub', 'Jenis Paket', 'Tanggal Keberangkatan', 'Status Pembayaran', 'Nama', 'Nik', 'Tempat/Tanggal Lahir', 'Jenis Kelamin', 'Pas Foto', 'Foto Ktp', 'Nama Ayah', 'No Telp', 'Alamat Lengkap Jamaah', 'Pasport Name', 'Passport Number', 'Passport Place Of Issued', 'Passport Issued', 'Passport Expiried', 'Foto Passport' ], 'Data Filtered', 'Excel')">Export
                                 Filtered Excel
                             </button>
                         </div>
@@ -52,13 +52,23 @@
                                     <td class="text-center">Jenis Paket</td>
                                     <td class="text-center">Tanggal Keberangkatan</td>
                                     <td class="text-center">Status Pembayaran</td>
+
                                     <td class="text-center">Nama</td>
                                     <td class="text-center">Nik</td>
                                     <td class="text-center">Tempat/Tanggal Lahir</td>
                                     <td class="text-center">Jenis Kelamin</td>
+                                    {{-- <td class="text-center">Pas Foto</td>
+                                    <td class="text-center">Foto Ktp</td> --}}
+
                                     <td class="text-center">Nama Ayah</td>
                                     <td class="text-center">No Telp</td>
                                     <td class="text-center">Alamat Lengkap Jamaah</td>
+                                    <td class="text-center">Passport Name</td>
+                                    <td class="text-center">Passport Number</td>
+                                    <td class="text-center">Passport Place Of Issued</td>
+                                    <td class="text-center">Passport Issued</td>
+                                    <td class="text-center">Passport Expiried</td>
+                                    {{-- <td class="text-center">Foto Passport</td> --}}
                                 </tr>
                                 @php $no = 1; @endphp
                                 @foreach ($data_jamaah as $jamaah)
@@ -80,10 +90,23 @@
                                                     @endif
                                                 </td> --}}
                                         <td>{{ $jamaah->sex }}</td>
+                                        {{-- <td><img src="{{ asset('/storage/' . $jamaah->avatar) }}" alt=""
+                                                style="width: 80px"></td>
+                                        <td><img src="{{ asset('/storage/' . $jamaah->foto_ktp) }}" alt=""
+                                                style="width: 80px"></td> --}}
                                         <td>{{ $jamaah->nama_ayah }}</td>
                                         <td>{{ $jamaah->no_telp }}</td>
                                         <td>{{ $jamaah->alamat . ',' . $jamaah->desa_kelurahan . ',' . $jamaah->kecamatan . ',' . $jamaah->kabupaten_kota . ',' . $jamaah->provinsi }}
                                         </td>
+                                        <td>{{ $jamaah->passpor_name }}</td>
+                                        <td>{{ $jamaah->passpor_no }}</td>
+                                        <td>{{ $jamaah->place_of_isssued_passpor }}</td>
+                                        <td>{{ $jamaah->issued_passpor }}</td>
+                                        <td>{{ $jamaah->expiried_passpor }}</td>
+                                        {{-- <td>
+                                            <img src="{{ asset('/storage/' . $jamaah->foto_passport) }}"
+                                                alt="{{ $jamaah->foto_passport }}" style="width: 80px">
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </table>

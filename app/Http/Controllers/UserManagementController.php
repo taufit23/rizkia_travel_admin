@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\TestMail;
+use App\Mail\RizkiaMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class UserManagementController extends Controller
 {
@@ -27,34 +28,39 @@ class UserManagementController extends Controller
     }
     public function tambah()
     {
+        
         return view('admin.user.tambah');
     }
     public function tambah_go(Request $request)
     {
+
         // dd($request);
         $request->validate([
             'name' => 'required|string|min:4|',
             'email' => 'required|email|',
             'role' => 'required'
         ]);
+
+        $password = Str::random(10);
+
         User::create([
         'name' => $request->name,
         'email' => $request->email,
         'role' => $request->role,
-        'password' => bcrypt('Rizkia'),
+        'password' => bcrypt($password),
         ]);
 
         $details = [
             'title' => 'Standard password accepted',
             'body' => '',
             'data' => 'Password Standart Anda Adalah',
-            'password' => 'Rizkia',
+            'password' => $password,
         ];
 
 
 
-        Mail::to("$request->email")->send(new TestMail($details));
+        Mail::to("$request->email")->send(new RizkiaMail($details));
 
-         return redirect('/user/user_management')->with('sucess', 'User Baru Ditambahkan!!!, Silahkan Ingatkan Untuk Melihat Emailnya');
+         return redirect('/user/user_management')->with('sucess', 'User Baru Ditambahkan!!!, Silahkan Ingatkan Untuk Melihat Emailnya, dan juga ingatkan untuk mengganti password!!');
     }
 }

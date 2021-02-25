@@ -185,4 +185,50 @@ class EditController extends Controller
         }
         return redirect()->back()->with('error', 'Foto Gagal Di Upload');   
     }
+
+    // Foto kk
+    public function foto_kk($id)
+    {
+        $jamaah = data_jamaah::find($id);
+        return view('admin.edit_foto_kk', ['jamaah' => $jamaah]);   
+    }
+    public function upload_foto_kk(Request $request, $id)
+    {
+        // dd($request->all());
+        $jamaah = data_jamaah::find($id);
+        $request->validate([
+            'foto_kk' => 'image|mimes:png,jpg,jpeg,gif,svg|max:9048'
+        ]);
+        // update foto_kk
+        if ($request->hasFile('foto_kk')) {
+            $request->file('foto_kk')->storeAs('public', $request->id . 'foto_kk_' . $request->file('foto_kk')->getClientOriginalName());
+            $jamaah->foto_kk = $request->id . 'foto_kk_' . $request->file('foto_kk')->getClientOriginalName();
+            $jamaah->save();
+            return redirect()->route('detail.jamaah', $id)->with('sucess', 'Data berhasil diUpdate');
+        }
+        return redirect()->back()->with('error', 'Foto Gagal Di Upload');   
+    }
+
+    // Foto visa
+    public function foto_visa($id)
+    {
+        $jamaah = data_jamaah::find($id);
+        return view('admin.edit_foto_visa', ['jamaah' => $jamaah]);   
+    }
+    public function upload_foto_visa(Request $request, $id)
+    {
+        // dd($request->all());
+        $jamaah = data_jamaah::find($id);
+        $request->validate([
+            'foto_visa' => 'image|mimes:png,jpg,jpeg,gif,svg|max:9048'
+        ]);
+        // update foto_visa
+        if ($request->hasFile('foto_visa')) {
+            $request->file('foto_visa')->storeAs('public', $request->id . 'foto_visa_' . $request->file('foto_visa')->getClientOriginalName());
+            $jamaah->foto_visa = $request->id . 'foto_visa_' . $request->file('foto_visa')->getClientOriginalName();
+            $jamaah->save();
+            return redirect()->route('detail.jamaah', $id)->with('sucess', 'Data berhasil diUpdate');
+        }
+        return redirect()->back()->with('error', 'Foto Gagal Di Upload');   
+    }
 }

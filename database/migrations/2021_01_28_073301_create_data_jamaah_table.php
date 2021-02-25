@@ -27,6 +27,8 @@ class CreateDataJamaahTable extends Migration
             $table->string('name');
             $table->string('tempat_lahir');
             $table->string('tanggal_lahir');
+
+            $table->string('passpor_name');
             $table->string('passpor_no');
             $table->string('place_of_isssued_passpor');
             $table->string('issued_passpor');

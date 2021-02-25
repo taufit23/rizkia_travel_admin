@@ -67,6 +67,9 @@
                                             @enderror
                                         </div>
                                     </div>
+
+                                    <a href="{{ url()->previous() }}" class="btn btn-default">Kembali</a>
+
                                     <button type="submit"
                                         class="btn btn-sm btn-warning btn-outline-light btn-rounded mx-auto">
                                         Update

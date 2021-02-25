@@ -157,7 +157,10 @@
                                     </span>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-warning btn-block">Update</button>
+                            <div class="text-center">
+                                <a href="{{ url()->previous() }}" class="btn btn-default">Kembali</a>
+                                <button type="submit" class="btn btn-warning">Update</button>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -59,6 +59,14 @@ Route::group(['middleware' => ['auth', 'checkRole:super_admin']], function () {
     Route::get('/dashboard/{id}/data_jamaah/upload_foto_passport', [EditController::class, 'foto_passport']);
     Route::put('/dashboard/{id}/data_jamaah/upload_foto_passport_action', [EditController::class, 'upload_foto_passport']);
 
+    // Foto kk
+    Route::get('/dashboard/{id}/data_jamaah/upload_foto_kk', [EditController::class, 'foto_kk']);
+    Route::put('/dashboard/{id}/data_jamaah/upload_foto_kk_action', [EditController::class, 'upload_foto_kk']);
+
+    // Foto visa
+    Route::get('/dashboard/{id}/data_jamaah/upload_foto_visa', [EditController::class, 'foto_visa']);
+    Route::put('/dashboard/{id}/data_jamaah/upload_foto_visa_action', [EditController::class, 'upload_foto_visa']);
+
     // input
     Route::get('/dashboard/input', [InputController::class, 'input']);
     Route::post('/dashboard/input/go', [InputController::class, 'input_go']);
@@ -97,50 +105,54 @@ Route::group(['middleware' => ['auth', 'checkRole:super_admin']], function () {
 });
 
 Route::middleware('auth')->group(function(){
-        Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
         // profile user
-        Route::get('/{id}/my_profile', [AuthController::class, 'my_profile'])->name('my_profile');
-        Route::get('/{id}/edit_profile', [AuthController::class, 'edit_profile']);
-        Route::put('/{id}/edit_profile/update_profile', [AuthController::class, 'update_profile']);
+    Route::get('/{id}/my_profile', [AuthController::class, 'my_profile'])->name('my_profile');
+    Route::get('/{id}/edit_profile', [AuthController::class, 'edit_profile']);
+    Route::put('/{id}/edit_profile/update_profile', [AuthController::class, 'update_profile']);
 
         // edit & update Pasword
-        Route::get('/{id}/edit_password_user', [AuthController::class, 'edit_password_user']);
-        Route::post('/{id}/edit_password_user/update', [AuthController::class, 'update_password_user'])->name('update_password.user');
+    Route::get('/{id}/edit_password_user', [AuthController::class, 'edit_password_user']);
+    Route::post('/{id}/edit_password_user/update', [AuthController::class, 'update_password_user'])->name('update_password.user');
 
         // tampil data & detail
-        Route::get('/dashboard/data_jamaah', [TampilDataController::class, 'tampil_data']);
-        Route::get('/dashboard/{id}/detail', [TampilDataController::class, 'detail_data'])->name('detail.jamaah');
+    Route::get('/dashboard/data_jamaah', [TampilDataController::class, 'tampil_data']);
+    Route::get('/dashboard/{id}/detail', [TampilDataController::class, 'detail_data'])->name('detail.jamaah');
 
         // EditController
         // update data pribadi
-        Route::get('/dashboard/{id}/data_jamaah/personal_edit', [EditController::class, 'edit_data_pribadi']);
-        Route::put('/dashboard/{id}/update_personal', [EditController::class, 'edit_data_pribadi_action']);
+    Route::get('/dashboard/{id}/data_jamaah/personal_edit', [EditController::class, 'edit_data_pribadi']);
+    Route::put('/dashboard/{id}/update_personal', [EditController::class, 'edit_data_pribadi_action']);
 
         // edit/upload avatar/foto_ktp/foto_passport
         // avatar
-        Route::get('/dashboard/{id}/data_jamaah/upload_avatar', [EditController::class, 'avatar']);
-        Route::put('/dashboard/{id}/data_jamaah/upload_avatar_action', [EditController::class, 'upload_avatar']);
+    Route::get('/dashboard/{id}/data_jamaah/upload_avatar', [EditController::class, 'avatar']);
+    Route::put('/dashboard/{id}/data_jamaah/upload_avatar_action', [EditController::class, 'upload_avatar']);
 
         // Foto Ktp
-        Route::get('/dashboard/{id}/data_jamaah/upload_foto_ktp', [EditController::class, 'foto_ktp']);
-        Route::put('/dashboard/{id}/data_jamaah/upload_foto_ktp_action', [EditController::class, 'upload_foto_ktp']);
+    Route::get('/dashboard/{id}/data_jamaah/upload_foto_ktp', [EditController::class, 'foto_ktp']);
+    Route::put('/dashboard/{id}/data_jamaah/upload_foto_ktp_action', [EditController::class, 'upload_foto_ktp']);
 
         // Foto Passport
-        Route::get('/dashboard/{id}/data_jamaah/upload_foto_passport', [EditController::class, 'foto_passport']);
-        Route::put('/dashboard/{id}/data_jamaah/upload_foto_passport_action', [EditController::class, 'upload_foto_passport']);
+    Route::get('/dashboard/{id}/data_jamaah/upload_foto_passport', [EditController::class, 'foto_passport']);
+    Route::put('/dashboard/{id}/data_jamaah/upload_foto_passport_action', [EditController::class, 'upload_foto_passport']);
+
+        // Foto kk
+    Route::get('/dashboard/{id}/data_jamaah/upload_foto_kk', [EditController::class, 'foto_kk']);
+    Route::put('/dashboard/{id}/data_jamaah/upload_foto_kk_action', [EditController::class, 'upload_foto_kk']);
+
+        // Foto visa
+    Route::get('/dashboard/{id}/data_jamaah/upload_foto_visa', [EditController::class, 'foto_visa']);
+    Route::put('/dashboard/{id}/data_jamaah/upload_foto_visa_action', [EditController::class, 'upload_foto_visa']);
 
 
         // input
-        Route::get('/dashboard/input', [InputController::class, 'input']);
-        Route::post('/dashboard/input/go', [InputController::class, 'input_go']);
+    Route::get('/dashboard/input', [InputController::class, 'input']);
+    Route::post('/dashboard/input/go', [InputController::class, 'input_go']);
 
-        // import Data
-        Route::get('/dashboard/import', [ImportExportController::class, 'import_data']);
-        Route::get('/dashboard/import/download', [ImportExportController::class, 'download_data'])->name('downloadsample');
-        Route::post('/dashboard/import/go', [ImportExportController::class, 'store'])->name('store.import');
 
         // image Slide Show
-        Route::get('/slide_show/slide_show_management', [DashboardController::class, 'slide_show'])->name('slide_show');
-        Route::post('/slide_show/slide_show_management/tambah', [DashboardController::class, 'slide_show_tambah'])->name('slide_show_tambah');
+    Route::get('/slide_show/slide_show_management', [DashboardController::class, 'slide_show'])->name('slide_show');
+    Route::post('/slide_show/slide_show_management/tambah', [DashboardController::class, 'slide_show_tambah'])->name('slide_show_tambah');
 });

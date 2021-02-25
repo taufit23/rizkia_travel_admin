@@ -29,15 +29,16 @@ class DataImport implements ToModel,WithHeadingRow
             'name'                      => $row['name'],
             'tempat_lahir'              => $row['tempat_lahir'],
             'tanggal_lahir'             => $row['tanggal_lahir'],
+            'passpor_name'              => $row['passpor_name'],
             'passpor_no'                => $row['passpor_no'],
             'place_of_isssued_passpor'  => $row['place_of_isssued_passpor'],
             'issued_passpor'            => $row['issued_passpor'],
             'expiried_passpor'          => $row['expiried_passpor'],
             'tanggal_keberangkatan'     => $row['tanggal_keberangkatan'],
-            'status_pembayaran'     => $row['status_pembayaran'],
-            'jenis_paket'     => $row['jenis_paket'],
-            'no_telp'     => $row['no_telp'],
-            'email'     => $row['email'],
+            'status_pembayaran'         => $row['status_pembayaran'],
+            'jenis_paket'               => $row['jenis_paket'],
+            'no_telp'                   => $row['no_telp'],
+            'email'                     => $row['email'],
         ]);
     }
 }

@@ -85,6 +85,9 @@
                                         <option value="BELUM LUNAS"
                                             {{ old('status_pembayaran') == 'BELUM LUNAS' ? 'selected' : '' }}>BELUM LUNAS
                                         </option>
+                                        <option value="SUDAH DP"
+                                            {{ old('status_pembayaran') == 'SUDAH DP' ? 'selected' : '' }}>SUDAH DP
+                                        </option>
                                     </select>
                                     @error('status_pembayaran')
                                         <span class="invalid-feedback">
@@ -324,6 +327,23 @@
                                 </div>
                             </div>
 
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 " for="passpor_name">Nama Passport : </label>
+                                <div class="col-sm-10">
+                                    <input name="passpor_name" type="text" value="{{ old('passport_no') }}"
+                                        class="form-control  @error('passport_no') is-invalid @enderror" id="passpor_name"
+                                        placeholder="Masukan Nama Passport">
+                                    @error('passpor_name')
+                                        <span class="invalid-feedback">
+                                            <div class="alert alert-danger">
+                                                {{ $message }}
+                                            </div>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="control-label col-sm-2 " for="passpor_no">Nomor Passport : </label>
                                 <div class="col-sm-10">
@@ -374,13 +394,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="expiried_passpor">Tanggal Berlaku Passport
+                                <label class="control-label col-sm-2" for="expiried_passpor">Tanggal Berakhir Passport
                                     : </label>
                                 <div class="col-sm-10">
                                     <input name="expiried_passpor" type="date" data-date-format="YYYY MMMM DD"
                                         value="{{ old('expiried_passpor') }}"
                                         class="form-control  @error('expiried_passpor') is-invalid @enderror"
-                                        id="expiried_passpor" placeholder="Masukan Tanggal Berlaku Passport">
+                                        id="expiried_passpor" placeholder="Masukan Tanggal Berakhir Passport">
                                     @error('expiried_passpor')
                                         <span class="invalid-feedback">
                                             <div class="alert alert-danger">

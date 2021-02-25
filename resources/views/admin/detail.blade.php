@@ -46,6 +46,7 @@
                                             <li>Grub <span>{{ $jama->grub }}</span></li>
                                             <li>Status Pembayaran <span>{{ $jama->status_pembayaran }}</span></li>
                                             <li>Jenis Paket <span>{{ $jama->jenis_paket }}</span></li>
+                                            <li>Passport name <span>{{ $jama->passpor_name }}</span></li>
                                             <li>Passport Number <span>{{ $jama->passpor_no }}</span></li>
                                             <li>place of issue passport
                                                 <span>{{ $jama->place_of_isssued_passpor }}</span>
@@ -150,17 +151,27 @@
                                             </table>
 
                                             <div class="text-center">
-                                                <button class="btn btn-outline-info btn-info" type="button"
-                                                    data-toggle="modal" data-target="#modal_avatar">Tampil
+                                                <button class="btn btn-sm btn-info" type="button" data-toggle="modal"
+                                                    data-target="#modal_avatar">Tampil
                                                     Avatar
                                                 </button>
-                                                <button class="btn btn-outline-info btn-info" type="button"
-                                                    data-toggle="modal" data-target="#modal_ktp">Tampil
+                                                <button class="btn btn-sm btn-info" type="button" data-toggle="modal"
+                                                    data-target="#modal_ktp">Tampil
                                                     KTP
                                                 </button>
-                                                <button class="btn btn-outline-info btn-info" type="button"
-                                                    data-toggle="modal" data-target="#modal_passport">Tampil
+                                                <button class="btn btn-sm btn-info" type="button" data-toggle="modal"
+                                                    data-target="#modal_passport">Tampil
                                                     Passport
+                                                </button>
+
+                                                <button class="btn btn-sm btn-info" type="button" data-toggle="modal"
+                                                    data-target="#modal_kk">Tampil
+                                                    Kartu Keluarga
+                                                </button>
+
+                                                <button class="btn btn-sm btn-info" type="button" data-toggle="modal"
+                                                    data-target="#modal_visa">Tampil
+                                                    Kartu Visa
                                                 </button>
 
                                             </div>
@@ -250,6 +261,44 @@
             </div>
             <div class="modal-footer">
                 <a href="/dashboard/{{ $jama->id }}/data_jamaah/upload_foto_passport" class="btn btn-default">Edit</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal kk -->
+    <div class="modal fade" id="modal_kk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="{{ $jama->getkk() }}" class="img-fluid" style="width: 500px;" alt="Avatar">
+            </div>
+            <div class="modal-footer">
+                <a href="/dashboard/{{ $jama->id }}/data_jamaah/upload_foto_kk" class="btn btn-default">Edit</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal visa -->
+    <div class="modal fade" id="modal_visa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="{{ $jama->getvisa() }}" class="img-fluid" style="width: 500px;" alt="Avatar">
+            </div>
+            <div class="modal-footer">
+                <a href="/dashboard/{{ $jama->id }}/data_jamaah/upload_foto_visa" class="btn btn-default">Edit</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

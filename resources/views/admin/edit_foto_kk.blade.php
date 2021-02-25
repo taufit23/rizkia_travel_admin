@@ -17,21 +17,21 @@
                             </div>
                         @endif
                         <form class="form-horizontal"
-                            action="/dashboard/{{ $jamaah->id }}/data_jamaah/upload_avatar_action" method="POST"
+                            action="/dashboard/{{ $jamaah->id }}/data_jamaah/upload_foto_kk_action" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="avatar">Foto Diri : </label>
+                                <label class="control-label col-sm-2" for="foto_kk">Foto kk : </label>
                                 <div class="col-md-2">
-                                    <img src="{{ $jamaah->getAvatar() }}" style="width: 200px; align-content: center"
+                                    <img src="{{ $jamaah->getkk() }}" style="width: 200px; align-content: center"
                                         class="img-fluid img-thumbnail" alt="">
                                 </div>
                                 <div class="col-sm-8">
-                                    <input type="file" name="avatar" id="avatar"
-                                        class="form-control @error('avatar') is-invalid @enderror">
-                                </div>@error('avatar')
+                                    <input type="file" name="foto_kk" id="foto_kk"
+                                        class="form-control-file @error('foto_kk') is-invalid @enderror">
+                                </div>@error('foto_kk')
                                     <span class="invalid-feedback">
                                         <div class="alert alert-danger">
                                             {{ $message }}

@@ -26,6 +26,7 @@ class data_jamaah extends Model
         'tempat_lahir',
         'tanggal_lahir',
         'passpor_no',
+        'passpor_name',
         'place_of_isssued_passpor',
         'issued_passpor',
         'expiried_passpor',
@@ -37,6 +38,8 @@ class data_jamaah extends Model
         'avatar',
         'foto_ktp',
         'foto_passport',
+        'foto_kk',
+        'foto_visa',
     ];
     // get foto avatar
     public function getAvatar()
@@ -58,6 +61,21 @@ class data_jamaah extends Model
         if (!$this->foto_passport) {
             return asset('image/passport_default.jpg');
         }return asset('storage/' . $this->foto_passport);
+    }
+    // get foto passport
+    public function getkk()
+    {
+        if (!$this->foto_kk) {
+            return asset('image/kk_default.jpg');
+        }return asset('storage/' . $this->foto_kk);
+    }
+
+    // get foto passport
+    public function getvisa()
+    {
+        if (!$this->foto_visa) {
+            return asset('image/visa_default.jpg');
+        }return asset('storage/' . $this->foto_visa);
     }
 
     public function getData_byDate($request)

@@ -84,6 +84,26 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="passpor_name">Passport Name :
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text"
+                                        value="{{ old('passpor_name') ? old('passpor_name') : $jamaah->passpor_name }}"
+                                        name="passpor_name" id="passpor_name"
+                                        class="form-control @error('passpor_name') is-invalid @enderror"
+                                        placeholder="Masukan Passport Name">
+                                    @error('passpor_name')
+                                        <span class="invalid-feedback">
+                                            <div class="alert alert-danger">
+                                                {{ $message }}
+                                            </div>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="passpor_no">Passport Number :
                                 </label>
@@ -175,8 +195,10 @@
                                     </span>
                                 @enderror
                             </div>
-
-                            <button type="submit" class="btn btn-default btn-block">Update</button>
+                            <div class="text-center">
+                                <a href="{{ url()->previous() }}" class="btn btn-default">Kembali</a>
+                                <button type="submit" class="btn btn-default">Update</button>
+                            </div>
                         </form>
                     </div>
                 </div>

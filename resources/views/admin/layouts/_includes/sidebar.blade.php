@@ -91,7 +91,7 @@
 
                                 <li>
                                     <a href="/dashboard/export"
-                                        class="{{ Request::is('dashboard/export') ? 'active' : '' }}"><i class="fa fa-upload
+                                        class="{{ Request::is('dashboard/export') ? 'active' : '' }}"><i class="fa fa-download
                                 "></i>By Filter
                                     </a>
                                 </li>
